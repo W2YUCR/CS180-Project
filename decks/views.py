@@ -1,7 +1,7 @@
 from django.urls import reverse_lazy
 from django.shortcuts import render
 from django.views.generic import ListView, DetailView
-from django.views.generic.edit import CreateView, UpdateView
+from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.views.generic.list import MultipleObjectMixin
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect
@@ -49,3 +49,10 @@ class CardCreateView(LoginRequiredMixin, CreateView):
 class CardUpdateView(LoginRequiredMixin, UpdateView):
     model=Card
     fields=['front', 'back']
+
+class CardDeleteView(LoginRequiredMixin, DeleteView):
+    model=Card
+
+    @override
+    def get_success_url(self):
+        return self.get_object().deck.get_absolute_url()
