@@ -1,7 +1,7 @@
 from django.urls import reverse_lazy
 from django.shortcuts import render
 from django.views.generic import ListView, DetailView
-from django.views.generic.edit import CreateView
+from django.views.generic.edit import CreateView, UpdateView
 from django.views.generic.list import MultipleObjectMixin
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect
@@ -45,3 +45,7 @@ class CardCreateView(LoginRequiredMixin, CreateView):
     def form_valid(self, form):
         form.instance.deck = Deck.objects.get(pk=self.kwargs.get('deck_pk'))
         return super().form_valid(form)
+
+class CardUpdateView(LoginRequiredMixin, UpdateView):
+    model=Card
+    fields=['front', 'back']

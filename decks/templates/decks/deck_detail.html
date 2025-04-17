@@ -2,7 +2,14 @@
 {% block content %}
     <h1>{{ deck.name }}</h1>
     <a href="{% url 'card-create' deck_pk=deck.pk %}">New card</a>
-    <ul>
-        {% for card in cards %}<li>{{ card.front }}</li>{% endfor %}
-    </ul>
+    <div class="d-grid gap-3">
+        {% for card in cards %}
+            <div class="border rounded position-relative">
+                <div class="m-3">{{ card.front }}</div>
+                <hr>
+                <div class="m-3">{{ card.back }}</div>
+                <a href="{{ card.get_absolute_url }}" class="stretched-link"><span class="visually-hidden">View card details</span></a>
+            </div>
+        {% endfor %}
+    </div>
 {% endblock content %}

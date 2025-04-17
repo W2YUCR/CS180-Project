@@ -8,4 +8,5 @@ urlpatterns = [
     path("create/", views.DeckCreateView.as_view(), name='deck-create'),
     path('<int:deck_pk>/create', views.CardCreateView.as_view(), name='card-create'),
     path('cards/<int:pk>', views.CardDetailView.as_view(), name='card-detail'),
+    path('cards/<int:pk>/update', views.CardUpdateView.as_view(), name='card-update'),
 ]
