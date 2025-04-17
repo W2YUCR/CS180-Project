@@ -13,3 +13,6 @@ class Card(models.Model):
     deck = models.ForeignKey(Deck, on_delete=models.CASCADE)
     front = models.TextField()
     back = models.TextField()
+
+    def get_absolute_url(self):
+        return reverse('card-detail', kwargs={ 'pk': self.id })

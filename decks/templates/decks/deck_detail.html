@@ -1,4 +1,8 @@
 {% extends "base.html" %}
 {% block content %}
-<h1>{{ deck.name }}</h1>
+    <h1>{{ deck.name }}</h1>
+    <a href="{% url 'card-create' deck_pk=deck.pk %}">New card</a>
+    <ul>
+        {% for card in cards %}<li>{{ card.front }}</li>{% endfor %}
+    </ul>
 {% endblock content %}
