@@ -1,4 +1,17 @@
 {% extends "base.html" %}
 {% block content %}
-    <a href="{% url 'decks' %}">Your decks</a>
+    <div class="introduction">
+        <p>
+            Welcome to TriviaTrek! This is where you can make flashcards for you to create and be able to study with them. You can create sets of flashcard, share flashcards for people to see or edit, take timed or untimed quizzes, and create your account
+            to save your flashcard files.
+        </p>
+        {% if user.is_authenticated %}
+            <p>
+                <a href="{% url 'decks' %}">Your decks</a>
+            </p>
+        {% else %}
+            <p>If you do not have an account, click the "Create Account" button.</p>
+            <p>If you do have an account, click the "Login" button.</p>
+        {% endif %}
+    </div>
 {% endblock %}
