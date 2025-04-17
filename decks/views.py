@@ -33,6 +33,14 @@ class DeckCreateView(LoginRequiredMixin, CreateView):
         form.instance.owner = self.request.user
         return super().form_valid(form)
 
+class DeckUpdateView(LoginRequiredMixin, UpdateView):
+    model=Deck
+    fields=['name']
+
+class DeckDeleteView(LoginRequiredMixin, DeleteView):
+    model=Deck
+    success_url=reverse_lazy('decks')
+
 class CardDetailView(LoginRequiredMixin, DetailView):
     model=Card
     context_object_name='card'

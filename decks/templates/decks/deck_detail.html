@@ -1,6 +1,8 @@
 {% extends "base.html" %}
 {% block content %}
     <h1>{{ deck.name }}</h1>
+    <a href="{% url 'deck-update' pk=deck.pk %}">Edit</a>
+    <a href="{% url 'deck-delete' pk=deck.pk %}">Delete</a>
     <a href="{% url 'card-create' deck_pk=deck.pk %}">New card</a>
     <div class="d-grid gap-3">
         {% for card in cards %}
