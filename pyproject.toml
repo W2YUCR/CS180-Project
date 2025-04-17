@@ -1,3 +1,15 @@
+[project]
+name = "triviatrek"
+version = "0.0.1"
+dependencies = ["Django", "mypy", "django-stubs", "djlint"]
+
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+packages = ["flashcards", "core", "accounts", "decks", "quiz"]
+
 [tool.mypy]
 plugins = ["mypy_django_plugin.main"]
 
