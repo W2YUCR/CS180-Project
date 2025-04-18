@@ -5,7 +5,8 @@ from decks.models import Card, Deck
 # Create your models here.
 class Quiz(models.Model):
     deck = models.ForeignKey(Deck, on_delete=models.CASCADE)
-    cards = models.ManyToManyField(Card, through='QuizCard')
+    cards = models.ManyToManyField(Card, through="QuizCard")
+    index = models.PositiveIntegerField()
 
 
 class QuizCard(models.Model):
