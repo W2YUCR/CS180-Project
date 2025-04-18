@@ -1,6 +1,11 @@
 {% extends "base.html" %}
 {% block content %}
     <h1>{{ deck.name }}</h1>
+    <form action="{% url 'quiz-create' %}" method="post">
+        {% csrf_token %}
+        <input type="hidden" name="deck_pk" value="{{ deck.pk }}">
+        <input type="submit" value="Review" />
+    </form>
     <a href="{% url 'deck-update' pk=deck.pk %}">Edit</a>
     <a href="{% url 'deck-delete' pk=deck.pk %}">Delete</a>
     <a href="{% url 'card-create' deck_pk=deck.pk %}">New card</a>
