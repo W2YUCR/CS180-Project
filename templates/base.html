@@ -18,9 +18,9 @@
     <div class="topnav">
         <div class="nav-left">
             {% if user.is_authenticated %}
-                <a>Home</a>
+                <a href="{% url 'index' %}">Home!</a>
                 <a>Create</a>
-                <a>Files</a>
+                <a>Flashcards</a>
                 <a>Quiz</a>
             {% else %}
                 <a href="{% url 'index' %}">Home</a>
