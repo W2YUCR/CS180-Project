@@ -1,10 +1,12 @@
 body {
-    background-color: #00a2ff;
+    background-color: #b6fdff !important;
+    min-height: 100vh; /* Ensure it covers the full screen */
 }
 
 .title {
     font-size: 50px;
     text-align: center;
+    color: #000757;
     font-family: "Courier New";
 }
 
