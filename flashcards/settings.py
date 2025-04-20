@@ -25,7 +25,10 @@ SECRET_KEY = 'django-insecure-$dx4=ag5p6y(k7rrgi8(v_z3ok1@k7&c)3un_l9ppcwu4^se+$
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS: list[str] = []
+from pathlib import Path
+from typing import List
+
+ALLOWED_HOSTS: List[str] = []
 
 
 # Application definition
