@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block content %}
+  <a href="{% url 'deck-create' %}">Create a new deck</a>
+  <ul>
+    {% for deck in deck_list %}
+      <li>
+        <a href="{{ deck.id }}">{{ deck.name }}</a>
+      </li>
+    {% endfor %}
+  </ul>
+{% endblock content %}

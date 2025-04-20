@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-$dx4=ag5p6y(k7rrgi8(v_z3ok1@k7&c)3un_l9ppcwu4^se+$
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS: list[str] = []
 
 
 # Application definition
@@ -33,6 +33,8 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'core.apps.CoreConfig',
     'accounts.apps.AccountsConfig',
+    'decks.apps.DecksConfig',
+    'quiz.apps.QuizConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% load static %}
+{% block scripts %}
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.5/dist/js.cookie.min.js"></script>
+    <script src="{% static 'quiz/quiz.js' %}"></script>
+{% endblock scripts %}
+{% block content %}
+    <p>
+        Card <span id="card-counter"></span> of <span>{{ num_cards }}</span>
+    </p>
+    <div class="border rounded m-3" id="card"></div>
+    <div class="btn-group" role="group">
+        <button class="btn btn-primary" id="known-btn">Know</button>
+        <button class="btn btn-primary" id="unknown-btn">Don't Know</button>
+        <button class="btn btn-primary" id="next-btn">Next</button>
+    </div>
+{% endblock content %}
