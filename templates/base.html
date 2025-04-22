@@ -14,12 +14,12 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"
                 integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq"
                 crossorigin="anonymous"></script>
-        {% block scripts %}{% endblock %}
+        {% block scripts %}{% endblock scripts %}
     </head>
     <body>
         <nav class="navbar navbar-expand-lg bg-primary">
             <div class="container">
-                <a href="/" class="navbar-brand">TriviaTrek</a>
+                <a href="{% url 'index' %}" class="navbar-brand">TriviaTrek</a>
                 <button class="navbar-toggler"
                         type="button"
                         data-bs-toggle="collapse"
@@ -67,7 +67,8 @@
             </div>
         </nav>
         <div class="container mt-5">
-            {% block content %}{% endblock %}
+            {% block content %}
+            {% endblock content %}
         </div>
     </body>
 </html>
