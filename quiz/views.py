@@ -8,7 +8,6 @@ from decks.models import Card, Deck
 
 from typing import override
 
-
 # Create your views here.
 class QuizView(TemplateView):
     template_name = "quiz/quiz.html"
