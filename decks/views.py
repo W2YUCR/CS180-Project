@@ -32,7 +32,7 @@ class DeckDetailView(LoginRequiredMixin, DetailView):
 
 class DeckCreateView(LoginRequiredMixin, CreateView):
     model = Deck
-    fields = ["name"]
+    fields = ["name", "description"]
 
     @override
     def form_valid(self, form):
@@ -42,7 +42,7 @@ class DeckCreateView(LoginRequiredMixin, CreateView):
 
 class DeckUpdateView(LoginRequiredMixin, UpdateView):
     model = Deck
-    fields = ["name", "published"]
+    fields = ["name", "description", "published"]
 
 
 class DeckDeleteView(LoginRequiredMixin, DeleteView):
