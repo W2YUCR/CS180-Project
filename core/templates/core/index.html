@@ -1,5 +1,9 @@
 {% extends "base.html" %}
 {% block content %}
+{% load static %} 
+
+<link rel="stylesheet" href="{% static 'core/home.css' %}">
+
 
 <div class="home">
 {% if user.is_authenticated %}
@@ -20,14 +24,20 @@
     <div class="home_card_set">
         <div class="home_card">
             <p class="home_card_text">Flashcards</p>
-            <div class="home_flashcard_card">
+            <div class="home_flashcard"></div>
+            <p class="dna_text">DNA</p>
+            <img src="{% static 'image/dna.webp' %}"  class="dna">
 
-            </div>
         </div>
         <div class="home_card">
             <p class="home_card_text">Quiz</p>
+            <div class="question_card"></div>
+            <img src="{% static 'image/question.webp' %}"  class="question">
+            <p class="true">True</p>
+            <p class="false">False</p>
         </div>
     </div>
+
 
 {% endif %}
 </div>

@@ -34,7 +34,7 @@ a {
     text-decoration: underline;
 }
 .login_bt:hover {
-    background-color: grey;
+    background-color: #B8C3BD;
 }
 .login_bt {
     background-color: #E3EDEA;
@@ -76,44 +76,3 @@ a {
     color: white;
 }
 */
-.home {
-    display: flex;
-    justify-content: center;
-    margin-top: 5%;
-    gap: 5%;
-
-}
-.introduction {
-    color: black;
-    font-size: 250%;
-    width: 99%;
-    display: flex;
-    flex-direction: column;
-    row-gap: 3rem;
-    margin-left: 3%;
-} 
-.home_card_set {
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-    gap: 5rem;
-}
-.home_card {
-    background-color: #21B78F;
-    width: 38%;
-    height: 45vh;
-    margin-top: 4%;
-    border-radius: 25px;
-    box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.3);
-    position: relative;
-}
-.home_card_text {
-    font-size: 300%;
-    position: absolute;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    margin-top: 15%;
-}
-.home_flashcard_card {
-    background-color: black;
-}
