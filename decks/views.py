@@ -3,63 +3,90 @@ from django.shortcuts import render
 from django.views.generic import ListView, DetailView
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.views.generic.list import MultipleObjectMixin
+from django.contrib.auth.models import User
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect
 from decks.models import Card, Deck
 from typing import override
 
+
 class DeckListView(LoginRequiredMixin, ListView):
-    context_object_name='deck_list'
+    context_object_name = "deck_list"
+
     @override
     def get_queryset(self):
+        assert isinstance(self.request.user, User)
         return Deck.objects.filter(owner=self.request.user)
 
+
 class DeckDetailView(LoginRequiredMixin, DetailView):
-    model=Deck
-    context_object_name='deck'
+    model = Deck
+    context_object_name = "deck"
 
     @override
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['cards'] = Card.objects.filter(deck=self.get_object())
+        context["cards"] = Card.objects.filter(deck=self.get_object())
         return context
 
+
 class DeckCreateView(LoginRequiredMixin, CreateView):
-    model=Deck
-    fields=['name']
+    model = Deck
+    fields = ["name", "description"]
 
     @override
     def form_valid(self, form):
         form.instance.owner = self.request.user
         return super().form_valid(form)
 
+
 class DeckUpdateView(LoginRequiredMixin, UpdateView):
-    model=Deck
-    fields=['name']
+    model = Deck
+    fields = ["name", "description", "published"]
+
 
 class DeckDeleteView(LoginRequiredMixin, DeleteView):
-    model=Deck
-    success_url=reverse_lazy('decks')
+    model = Deck
+    success_url = reverse_lazy("decks")
+
+
+class SharedDecksView(ListView):
+    context_object_name = "deck_list"
+    template_name = "decks/shared.html"
+
+    @override
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["search"] = self.request.GET.get("search", "")
+        return context
+
+    @override
+    def get_queryset(self):
+        return Deck.objects.select_related("owner").filter(published=True)
+
 
 class CardDetailView(LoginRequiredMixin, DetailView):
-    model=Card
-    context_object_name='card'
+    model = Card
+    context_object_name = "card"
+
 
 class CardCreateView(LoginRequiredMixin, CreateView):
-    model=Card
-    fields=['front', 'back']
+    model = Card
+    fields = ["front", "back"]
 
     @override
     def form_valid(self, form):
-        form.instance.deck = Deck.objects.get(pk=self.kwargs.get('deck_pk'))
+        form.instance.deck = Deck.objects.get(pk=self.kwargs.get("deck_pk"))
         return super().form_valid(form)
 
+
 class CardUpdateView(LoginRequiredMixin, UpdateView):
-    model=Card
-    fields=['front', 'back']
+    model = Card
+    fields = ["front", "back"]
+
 
 class CardDeleteView(LoginRequiredMixin, DeleteView):
-    model=Card
+    model = Card
 
     @override
     def get_success_url(self):

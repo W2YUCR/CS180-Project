@@ -3,5 +3,5 @@
     <a href="{{ card.deck.get_absolute_url }}">Back to deck</a>
     <a href="{% url 'card-update' pk=card.pk %}">Edit</a>
     <a href="{% url 'card-delete' pk=card.pk %}">Delete</a>
-    {% include 'decks/_card_preview.html' %}
+    {% include "decks/_card_preview.html" %}
 {% endblock content %}

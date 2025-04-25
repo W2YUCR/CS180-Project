@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
     <h1>{{ deck.name }}</h1>
+    <p>{{ deck.description }}</p>
     <form action="{% url 'quiz-create' %}" method="post">
         {% csrf_token %}
         <input type="hidden" name="deck_pk" value="{{ deck.pk }}">
