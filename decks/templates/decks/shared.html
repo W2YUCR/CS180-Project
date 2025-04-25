@@ -13,11 +13,5 @@
     {% else %}
         <p>All shared decks</p>
     {% endif %}
-    <div class="container">
-        <div class="row row-cols-1 row-cols-md-3">
-            {% for deck in deck_list %}
-                <div class="col">{% include "decks/_deck_card.html" with deck=deck %}</div>
-            {% endfor %}
-        </div>
-    </div>
+    {% include "decks/_deck_list.html" with deck_list=deck_list %}
 {% endblock content %}
