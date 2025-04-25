@@ -3,6 +3,7 @@ from django.shortcuts import render
 from django.views.generic import ListView, DetailView
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.views.generic.list import MultipleObjectMixin
+from django.contrib.auth.models import User
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect
 from decks.models import Card, Deck
@@ -12,6 +13,7 @@ class DeckListView(LoginRequiredMixin, ListView):
     context_object_name='deck_list'
     @override
     def get_queryset(self):
+        assert(isinstance(self.request.user, User));
         return Deck.objects.filter(owner=self.request.user)
 
 class DeckDetailView(LoginRequiredMixin, DetailView):
