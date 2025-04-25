@@ -1,9 +1,49 @@
 body {
-    background-color: #5fcdd1 !important;
+    background-color: #E3EDEA;
     min-height: 100vh;
+
+a {
+    text-decoration: none;
+    color: black;
+}
+}
+.navbar {
+    background-color: #BFD0CD;
+    width: 100%;
+    height: 13vh;
+    box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.4);
+
 }
 
-.title {
+.logo {
+    color: black;
+    text-decoration: none;
+    font-size: 350%;   
+    margin-left: 2%;
+}
+.nav_options {
+    display: flex;
+    flex-direction: row;
+    text-decoration: none;
+    padding-right: 2%;
+    gap: 5rem;
+    font-size: 200%;
+
+}
+.create_account:hover {
+    text-decoration: underline;
+}
+.login_bt:hover {
+    background-color: grey;
+}
+.login_bt {
+    background-color: #E3EDEA;
+    border-radius: 30px;
+    padding: 15px 50px ;
+    box-shadow: 0 2px 4px;
+}
+
+/* .title {
     font-size: 50px;
     text-align: center;
     color: #000757;
@@ -35,13 +75,45 @@ body {
     background-color: #04AA6D;
     color: white;
 }
+*/
+.home {
+    display: flex;
+    justify-content: center;
+    margin-top: 5%;
+    gap: 5%;
 
+}
 .introduction {
-    margin-top: 30px;
-    padding: 20px;
-    font-size: 25px;
-    text-align: left;
-    font-family: "Courier New";
-    background-color: #007bff;
-    color: #ffffff;
+    color: black;
+    font-size: 250%;
+    width: 99%;
+    display: flex;
+    flex-direction: column;
+    row-gap: 3rem;
+    margin-left: 3%;
+} 
+.home_card_set {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    gap: 5rem;
+}
+.home_card {
+    background-color: #21B78F;
+    width: 38%;
+    height: 45vh;
+    margin-top: 4%;
+    border-radius: 25px;
+    box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.3);
+    position: relative;
+}
+.home_card_text {
+    font-size: 300%;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin-top: 15%;
+}
+.home_flashcard_card {
+    background-color: black;
 }
