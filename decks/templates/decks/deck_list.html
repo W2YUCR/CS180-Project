@@ -1,11 +1,21 @@
 {% extends "base.html" %}
+{% load static %}
 {% block content %}
-  <a href="{% url 'deck-create' %}">Create a new deck</a>
-  <ul>
-    {% for deck in deck_list %}
-      <li>
-        <a href="{{ deck.id }}">{{ deck.name }}</a>
-      </li>
-    {% endfor %}
-  </ul>
+  <link rel="stylesheet" href="{% static 'core/deck-list.css' %}">
+  <table>
+    <thead>
+      <tr>
+        <th style="width: 10%;">ID</th>
+        <th style="width: 90%;">Flashcard Sets</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for deck in deck_list %}
+        <tr>
+          <td style="color: #000000">{{ deck.id }}</td>
+          <td><a href="{{ deck.id }}" style="color: #000000">{{ deck.name }}</a></td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
 {% endblock content %}

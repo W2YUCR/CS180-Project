@@ -1,7 +1,9 @@
 {% extends "base.html" %}
+{% load static %}
 {% block content %}
+<link rel="stylesheet" href="{% static 'core/card_form.css' %}">
 <form method="post">{% csrf_token %}
     {{ form.as_p }}
-    <input type="submit" value="Save">
+    <input type="submit" value="Save" class="save-button2">
 </form>
 {% endblock content %}
