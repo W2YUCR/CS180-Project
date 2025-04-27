@@ -1,4 +1,6 @@
-<div class="border rounded">
+{% load static %}
+<link rel="stylesheet" href="{% static 'core/_card_preview.css' %}">
+<div class="border_rounded">
     <div class="m-3">{{ card.front }}</div>
     <hr>
     <div class="m-3">{{ card.back }}</div>

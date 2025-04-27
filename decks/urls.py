@@ -8,7 +8,8 @@ urlpatterns = [
     path("create/", views.DeckCreateView.as_view(), name="deck-create"),
     path("<int:pk>/update", views.DeckUpdateView.as_view(), name="deck-update"),
     path("<int:pk>/delete", views.DeckDeleteView.as_view(), name="deck-delete"),
-    path("<int:deck_pk>/create", views.CardCreateView.as_view(), name="card-create"),
+    # Updated card creation URL pattern
+    path("<int:deck_pk>/cards/create/", views.CardCreateView.as_view(), name="card-create"),
     path("cards/<int:pk>", views.CardDetailView.as_view(), name="card-detail"),
     path("cards/<int:pk>/update", views.CardUpdateView.as_view(), name="card-update"),
     path("cards/<int:pk>/delete", views.CardDeleteView.as_view(), name="card-delete"),
