@@ -25,7 +25,16 @@ class RestrictedToDeckOwnerMixin(LoginRequiredMixin, PermissionRequiredMixin):
         return self.get_object().owner == self.request.user
 
 
-class DeckDetailView(RestrictedToDeckOwnerMixin, DetailView):
+class ShareableDeckMixin(LoginRequiredMixin, PermissionRequiredMixin):
+    @override
+    def has_permission(self):
+        return (
+            self.get_object().owner == self.request
+            or self.get_object().published == True
+        )
+
+
+class DeckDetailView(ShareableDeckMixin, DetailView):
     model = Deck
     context_object_name = "deck"
 
@@ -77,7 +86,16 @@ class RestrictedToCardOwnerMixin(LoginRequiredMixin, PermissionRequiredMixin):
         return self.get_object().deck.owner == self.request.user
 
 
-class CardDetailView(RestrictedToCardOwnerMixin, DetailView):
+class ShareableCardMixin(LoginRequiredMixin, PermissionRequiredMixin):
+    @override
+    def has_permission(self):
+        return (
+            self.get_object().deck.owner == self.request
+            or self.get_object().deck.published == True
+        )
+
+
+class CardDetailView(ShareableCardMixin, DetailView):
     model = Card
     context_object_name = "card"
 
@@ -88,7 +106,9 @@ class CardCreateView(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
 
     @override
     def has_permission(self):
-        return Deck.objects.get(pk=self.kwargs.get("deck_pk")).owner == self.request.user
+        return (
+            Deck.objects.get(pk=self.kwargs.get("deck_pk")).owner == self.request.user
+        )
 
     @override
     def form_valid(self, form):
