@@ -1,13 +1,22 @@
+from django.http.request import HttpRequest
 from django.urls import reverse_lazy
 from django.shortcuts import render
 from django.views.generic import ListView, DetailView
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.views.generic.list import MultipleObjectMixin
 from django.contrib.auth.models import User
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.shortcuts import redirect
 from decks.models import Card, Deck
-from typing import override
+from typing import override, Protocol
+
+
+# This is probably not a good idea but it fixes the type errors...
+# https://mypy.readthedocs.io/en/latest/more_types.html#mixin-classes
+class ObjectViewProtocol[T](Protocol):
+    request: HttpRequest
+
+    def get_object(self) -> T: ...
 
 
 class DeckListView(LoginRequiredMixin, ListView):
@@ -19,7 +28,22 @@ class DeckListView(LoginRequiredMixin, ListView):
         return Deck.objects.filter(owner=self.request.user)
 
 
-class DeckDetailView(LoginRequiredMixin, DetailView):
+class RestrictedToDeckOwnerMixin(LoginRequiredMixin, PermissionRequiredMixin):
+    @override
+    def has_permission(self: ObjectViewProtocol[Deck]):
+        return self.get_object().owner == self.request.user
+
+
+class ShareableDeckMixin(LoginRequiredMixin, PermissionRequiredMixin):
+    @override
+    def has_permission(self: ObjectViewProtocol[Deck]):
+        return (
+            self.get_object().owner == self.request
+            or self.get_object().published == True
+        )
+
+
+class DeckDetailView(ShareableDeckMixin, DetailView):
     model = Deck
     context_object_name = "deck"
 
@@ -40,12 +64,12 @@ class DeckCreateView(LoginRequiredMixin, CreateView):
         return super().form_valid(form)
 
 
-class DeckUpdateView(LoginRequiredMixin, UpdateView):
+class DeckUpdateView(RestrictedToDeckOwnerMixin, UpdateView):
     model = Deck
     fields = ["name", "description", "published"]
 
 
-class DeckDeleteView(LoginRequiredMixin, DeleteView):
+class DeckDeleteView(RestrictedToDeckOwnerMixin, DeleteView):
     model = Deck
     success_url = reverse_lazy("decks")
 
@@ -62,17 +86,41 @@ class SharedDecksView(ListView):
 
     @override
     def get_queryset(self):
-        return Deck.objects.select_related("owner").filter(published=True)
+        # filter(published=True) for some reason fails mypy even though Django works fine
+        # Therefore, we use the alternative syntax which avoids mypy checking
+        # Note: should probably figure out why it fails
+        return Deck.objects.select_related("owner").filter(**{"published": True})
 
 
-class CardDetailView(LoginRequiredMixin, DetailView):
+class RestrictedToCardOwnerMixin(LoginRequiredMixin, PermissionRequiredMixin):
+    @override
+    def has_permission(self: ObjectViewProtocol[Card]):
+        return self.get_object().deck.owner == self.request.user
+
+
+class ShareableCardMixin(LoginRequiredMixin, PermissionRequiredMixin):
+    @override
+    def has_permission(self: ObjectViewProtocol[Card]):
+        return (
+            self.get_object().deck.owner == self.request
+            or self.get_object().deck.published == True
+        )
+
+
+class CardDetailView(ShareableCardMixin, DetailView):
     model = Card
     context_object_name = "card"
 
 
-class CardCreateView(LoginRequiredMixin, CreateView):
+class CardCreateView(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
     model = Card
     fields = ["front", "back"]
+
+    @override
+    def has_permission(self):
+        return (
+            Deck.objects.get(pk=self.kwargs.get("deck_pk")).owner == self.request.user
+        )
 
     @override
     def form_valid(self, form):
@@ -80,12 +128,12 @@ class CardCreateView(LoginRequiredMixin, CreateView):
         return super().form_valid(form)
 
 
-class CardUpdateView(LoginRequiredMixin, UpdateView):
+class CardUpdateView(RestrictedToCardOwnerMixin, UpdateView):
     model = Card
     fields = ["front", "back"]
 
 
-class CardDeleteView(LoginRequiredMixin, DeleteView):
+class CardDeleteView(RestrictedToCardOwnerMixin, DeleteView):
     model = Card
 
     @override
