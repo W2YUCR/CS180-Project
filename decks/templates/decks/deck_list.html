@@ -5,15 +5,17 @@
   <table>
     <thead>
       <tr>
-        <th style="width: 10%;">ID</th>
-        <th style="width: 90%;">Flashcard Sets</th>
+        <th>ID</th>
+        <th>Flashcard Sets</th>
       </tr>
     </thead>
     <tbody>
       {% for deck in deck_list %}
         <tr>
-          <td style="color: #000000">{{ deck.id }}</td>
-          <td><a href="{{ deck.id }}" style="color: #000000">{{ deck.name }}</a></td>
+          <td>{{ deck.id }}</td>
+          <td>
+            <a href="{{ deck.id }}">{{ deck.name }}</a>
+          </td>
         </tr>
       {% endfor %}
     </tbody>
