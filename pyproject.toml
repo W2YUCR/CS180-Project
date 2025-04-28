@@ -10,6 +10,8 @@ dependencies = [
     "channels_redis",
     "dramatiq[redis, watch]",
     "django-dramatiq",
+    "django-environ",
+    "mysqlclient",
 ]
 
 [build-system]
