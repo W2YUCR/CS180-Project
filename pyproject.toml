@@ -1,7 +1,7 @@
 [project]
 name = "triviatrek"
 version = "0.0.1"
-dependencies = ["Django", "mypy", "django-stubs", "djlint"]
+dependencies = ["Django", "mypy", "django-stubs", "djlint", "channels[daphne]"]
 
 [build-system]
 requires = ["setuptools"]

@@ -34,6 +34,7 @@ ALLOWED_HOSTS: List[str] = []
 # Application definition
 
 INSTALLED_APPS = [
+    'daphne',
     'core.apps.CoreConfig',
     'accounts.apps.AccountsConfig',
     'decks.apps.DecksConfig',
@@ -73,6 +74,7 @@ TEMPLATES = [
     },
 ]
 
+ASGI_APPLICATION = 'flashcards.asgi.application'
 WSGI_APPLICATION = 'flashcards.wsgi.application'
 
 
