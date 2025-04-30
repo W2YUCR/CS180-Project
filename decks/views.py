@@ -38,7 +38,7 @@ class ShareableDeckMixin(LoginRequiredMixin, PermissionRequiredMixin):
     @override
     def has_permission(self: ObjectViewProtocol[Deck]):
         return (
-            self.get_object().owner == self.request
+            self.get_object().owner == self.request.user
             or self.get_object().published == True
         )
 
@@ -102,7 +102,7 @@ class ShareableCardMixin(LoginRequiredMixin, PermissionRequiredMixin):
     @override
     def has_permission(self: ObjectViewProtocol[Card]):
         return (
-            self.get_object().deck.owner == self.request
+            self.get_object().deck.owner == self.request.user
             or self.get_object().deck.published == True
         )
 
