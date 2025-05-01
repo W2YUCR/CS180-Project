@@ -35,6 +35,7 @@ ALLOWED_HOSTS: List[str] = []
 
 INSTALLED_APPS = [
     'daphne',
+    'django_dramatiq',
     'core.apps.CoreConfig',
     'accounts.apps.AccountsConfig',
     'decks.apps.DecksConfig',
@@ -75,6 +76,32 @@ TEMPLATES = [
 ]
 
 ASGI_APPLICATION = 'flashcards.asgi.application'
+
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels_redis.core.RedisChannelLayer",
+        "CONFIG": {
+            "hosts": [("127.0.0.1", 6379)],
+        },
+    },
+}
+
+DRAMATIQ_BROKER = {
+    "BROKER": "dramatiq.brokers.redis.RedisBroker", 
+    "OPTIONS": {
+        "url": "redis://localhost:6379",
+    },
+    "MIDDLEWARE": [
+        "dramatiq.middleware.Prometheus",
+        "dramatiq.middleware.AgeLimit",
+        "dramatiq.middleware.TimeLimit",
+        "dramatiq.middleware.Callbacks",
+        "dramatiq.middleware.Retries",
+        "django_dramatiq.middleware.DbConnectionsMiddleware",
+        "django_dramatiq.middleware.AdminMiddleware",
+    ]
+}
+
 WSGI_APPLICATION = 'flashcards.wsgi.application'
 
 
