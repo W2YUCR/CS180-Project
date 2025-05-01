@@ -19,7 +19,7 @@
     <body>
         <div class="navbar">
             <!-- <div class="container"> -->
-                <a href="/" class="logo">TriviaTrek</a>
+                <a href="{% url 'index' %}" class="logo">TriviaTrek</a>
                 <!-- <button class="navbar-toggler"
                         type="button"
                         data-bs-toggle="collapse"
@@ -63,8 +63,8 @@
                 <!-- </div> -->
             <!-- </div> -->
         </div>
-        <div class="">
-            {% block content %}{% endblock %}
+        <div>
+            {% block content %}{% endblock content%}
         </div>
     </body>
 </html>
