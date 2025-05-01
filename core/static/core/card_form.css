@@ -8,3 +8,14 @@
     margin: 10px;
     font-family: "Courier New";
 }
+
+textarea {
+    background-color: white;
+    color: black;
+    min-height: 150px;
+    padding: 10px;
+    font-family: "Courier New", monospace;
+    border: 2px solid black;
+    border-radius: 10px;
+    resize: vertical;
+}
