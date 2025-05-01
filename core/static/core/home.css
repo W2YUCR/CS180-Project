@@ -7,7 +7,7 @@
 }
 .introduction {
     color: black;
-    font-size: 250%;
+    font-size: 2.5rem;
     width: 99%;
     display: flex;
     flex-direction: column;
@@ -34,7 +34,7 @@
     transform: scale(1.1);
 }
 .home_card_text {
-    font-size: 300%;
+    font-size: 3rem;
     position: absolute;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -57,7 +57,7 @@
     position: absolute;
     left: 45%;
     top: 35%;
-    font-size: 200%;
+    font-size: 2rem;
     transform: rotate(10deg);
 }
 .dna {
@@ -94,7 +94,7 @@
     top: 70%;
     box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.2);
     color: black;
-    font-size: 170%;
+    font-size: 2rem;
 }
 .false {
     background-color: white;   
@@ -106,5 +106,5 @@
     top: 70%;
     box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.2);
     color: black;
-    font-size: 170%;
+    font-size: 2rem;
 }

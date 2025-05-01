@@ -35,7 +35,7 @@
                             <a href="{% url 'index' %}" class="nav-link">Home</a>
                         </li>-->
                         {% if user.is_authenticated %}
-                        <div class="login_options"">
+                        <div class="login_options">
                             <a href="{% url 'create' %}" class="login_hover">Create</a>
                             <a href="{% url 'decks' %}" class="login_hover">Flashcard Sets</a>
                             <a class="login_hover" href="{% url 'shared-decks' %}">Shared</a>
