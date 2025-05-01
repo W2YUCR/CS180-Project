@@ -13,6 +13,7 @@ from decks.models import Card, Deck
 class QuizView(TemplateView):
     template_name = "quiz/quiz.html"
 
+    @override
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         pk = self.kwargs["pk"]
