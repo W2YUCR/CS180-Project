@@ -1,6 +1,7 @@
 .deck-info{
     background-color: #007bff;
     color: white;
+    border: 5px solid black;
     padding: 10px;
     margin-bottom: 20px;
     font-family: "Courier New";

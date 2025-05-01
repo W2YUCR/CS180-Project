@@ -2,6 +2,9 @@ from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.http import JsonResponse, HttpResponse
 from django.views.generic import View, TemplateView
+from django.utils.decorators import method_decorator
+from django.views.decorators.csrf import csrf_protect
+from django.shortcuts import get_object_or_404
 
 from quiz.models import Quiz
 from decks.models import Card, Deck
@@ -12,12 +15,17 @@ from typing import override
 class QuizView(TemplateView):
     template_name = "quiz/quiz.html"
 
-    @override
     def get_context_data(self, **kwargs):
-        pk = self.kwargs["pk"]
-        quiz = Quiz.objects.get(pk=pk)
         context = super().get_context_data(**kwargs)
-        context["num_cards"] = quiz.cards.count()
+        pk = self.kwargs["pk"]
+        quiz = get_object_or_404(Quiz, pk=pk)
+        cards = quiz.cards.all()
+        first_card = cards.first()
+        deck = first_card.deck if first_card else None
+        context["quiz"] = quiz
+        context["cards"] = cards
+        context["num_cards"] = cards.count()
+        context["deck"] = deck
         return context
 
 
