@@ -1,13 +1,9 @@
 {% extends "base.html" %}
 {% block content %}
 {% load static %} 
-
 <link rel="stylesheet" href="{% static 'core/home.css' %}">
-
-
 <div class="home">
 {% if user.is_authenticated %}
-
     <div class="introduction">
         <p>Welcome back to TriviaTrek!<br></p>
         <p>If you want to create a new set of flashcards, click the "Create" button.<br></p>
@@ -22,9 +18,6 @@
         <p>If you do not have an account, click the "Create Account" button.<br></p>
         <p>If you do have an account, click the "Login" button.<br></p>
     </div>
-
-
-
 {% endif %}
 <div class="home_card_set">
     <div class="home_card">

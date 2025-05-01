@@ -45,18 +45,17 @@
                     </ul> 
                     <div class="nav_options">
                         {% if user.is_authenticated %}
-                        
-                            <div class="">
+                            <div>
                                 <form action="{% url 'logout' %}" method="post">
                                     {% csrf_token %}
                                     <button type="submit" class="logout_bt">Log Out</button>
                                 </form>
                             </div>
                         {% else %}
-                            <div class="">
+                            <div>
                                 <a href="{% url 'signup' %}" class="create_account">Create Account</a>
                             </div>
-                            <div class="">
+                            <div>
                                 <a href="{% url 'login' %}" class="login_bt">Log in</a>
                             </div>
                         {% endif %}
