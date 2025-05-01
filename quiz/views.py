@@ -9,8 +9,6 @@ from django.shortcuts import get_object_or_404
 from quiz.models import Quiz
 from decks.models import Card, Deck
 
-from typing import override
-
 # Create your views here.
 class QuizView(TemplateView):
     template_name = "quiz/quiz.html"
@@ -30,7 +28,6 @@ class QuizView(TemplateView):
 
 
 class QuizCurrentView(View):
-    @override
     def get(self, request, *args, **kwargs):
         pk = self.kwargs["pk"]
         quiz = Quiz.objects.get(pk=pk)
@@ -49,7 +46,6 @@ class QuizCurrentView(View):
 
 
 class QuizNextView(View):
-    @override
     def post(self, request, *args, **kwargs):
         pk = self.kwargs["pk"]
         quiz = Quiz.objects.get(pk=pk)
