@@ -16,9 +16,33 @@ th, td {
 
 th {
     background-color: #0015ff;
+    color: white;
+    font-size: 28px;
+}
+
+td, th {
+    width: 200px; /* Set fixed width for all columns */
+}
+
+th:nth-child(1), td:nth-child(1) {
+    width: 25px; /* Set width for the first column */
+}
+
+th:nth-child(2), td:nth-child(2) {
+    width: 350px; /* Set width for the second column */
+}
+
+tbody tr:hover {
+    background-color: #0088ff;
+    cursor: pointer;
 }
 
 a {
     text-decoration: none;
     color: #000000;
+}
+
+a:hover {
+    text-decoration: underline;
+    color: #0033cc;
 }
