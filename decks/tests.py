@@ -2,8 +2,10 @@
 from django.test import TestCase
 from django.urls import reverse
 from django.contrib.auth.models import User
+from typing import override
 
 class DeckViewTests(TestCase):
+    @override
     def setUp(self):
         self.user = User.objects.create_user('u1', password='pass')
         self.client.login(username='u1', password='pass')
