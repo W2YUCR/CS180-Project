@@ -1,77 +1,74 @@
+<!--templates/base.html-->
 {% load static %}
 <!DOCTYPE html>
 {# djlint:off H030,H031 #}
 <html lang="en" data-bs-theme="dark">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>TriviaTrek</title>
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css"
-              rel="stylesheet"
-              integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7"
-              crossorigin="anonymous">
-        <link rel="stylesheet" href="{% static 'core/base.css' %}">
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"
-                integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq"
-                crossorigin="anonymous"></script>
-        {% block scripts %}{% endblock scripts %}
-    </head>
-    <body>
-        <nav class="navbar navbar-expand-lg bg-primary">
-            <div class="container">
-                <a href="{% url 'index' %}" class="navbar-brand">TriviaTrek</a>
-                <button class="navbar-toggler"
-                        type="button"
-                        data-bs-toggle="collapse"
-                        data-bs-target="#navbarNav"
-                        aria-controls="navbarNav"
-                        aria-expanded="false"
-                        aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse">
-                    <ul class="navbar-nav me-auto">
-                        <li class="nav-item">
-                            <a href="{% url 'index' %}" class="nav-link">Home</a>
-                        </li>
-                        {% if user.is_authenticated %}
-                            <li class="nav-item">
-                                <a href="{% url 'create' %}" class="nav-link">Create</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="{% url 'decks' %}" class="nav-link">Flashcard Sets</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{% url 'shared-decks' %}">Shared</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link">Quiz</a>
-                            </li>
-                        {% endif %}
-                    </ul>
-                    <ul class="navbar-nav">
-                        {% if user.is_authenticated %}
-                            <li class="nav-item">
-                                <form action="{% url 'logout' %}" method="post">
-                                    {% csrf_token %}
-                                    <button type="submit" class="btn">Log Out</button>
-                                </form>
-                            </li>
-                        {% else %}
-                            <li class="nav-item">
-                                <a href="{% url 'signup' %}" class="nav-link">Create Account</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="{% url 'login' %}" class="nav-link">Log in</a>
-                            </li>
-                        {% endif %}
-                    </ul>
-                </div>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TriviaTrek</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'core/base.css' %}">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq"
+        crossorigin="anonymous"></script>
+    {% block scripts %}{% endblock scripts %}
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg bg-primary">
+        <div class="container">
+            <a href="{% url 'index' %}" class="navbar-brand">TriviaTrek</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a href="{% url 'index' %}" class="nav-link">Home</a>
+                    </li>
+                    {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        <a href="{% url 'create' %}" class="nav-link">Create</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{% url 'decks' %}" class="nav-link">Flashcard Sets</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'shared-decks' %}">Shared</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link">Quiz</a>
+                    </li>
+                    {% endif %}
+                </ul>
+                <ul class="navbar-nav">
+                    {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        <form action="{% url 'logout' %}" method="post">
+                            {% csrf_token %}
+                            <button type="submit" class="btn">Log Out</button>
+                        </form>
+                    </li>
+                    {% else %}
+                    <li class="nav-item">
+                        <a href="{% url 'signup' %}" class="nav-link">Create Account</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{% url 'login' %}" class="nav-link">Log in</a>
+                    </li>
+                    {% endif %}
+                </ul>
             </div>
-        </nav>
-        <div class="container mt-5">
-            {% block content %}
-            {% endblock content %}
         </div>
-    </body>
+    </nav>
+    <div class="container mt-5">
+        {% block content %}
+        {% endblock content %}
+    </div>
+</body>
+
 </html>

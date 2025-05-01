@@ -1,30 +1,33 @@
+<!--decks/templates/decks/deck_detail.html-->
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
-    <link rel="stylesheet" href="{% static 'core/deck-detail.css' %}">
-    <div class="deck-info">
-        <h1>{{ deck.name }}</h1>
-        <p>{{ deck.description }}</p>
+<link rel="stylesheet" href="{% static 'core/deck-detail.css' %}">
+<div class="deck-info">
+    <h1>{{ deck.name }}</h1>
+    <p>{{ deck.description }}</p>
+</div>
+<form action="{% url 'quiz-create' %}" method="post">
+    {% csrf_token %}
+    <input type="hidden" name="deck_pk" value="{{ deck.pk }}">
+    <input type="submit" value="Review" class="review-button">
+</form>
+<div class="create-navigation">
+    <a href="?shuffle=true">Shuffle Cards</a>
+    <a href="{% url 'deck-update' pk=deck.pk %}">Edit</a>
+    <a href="{% url 'deck-delete' pk=deck.pk %}">Delete</a>
+    <a href="{% url 'card-create' deck_pk=deck.pk %}">New card</a>
+</div>
+
+<div class="d-grid gap-3">
+    {% for card in cards %}
+    <div class="border_rounded_position-relative">
+        <a href="{{ card.get_absolute_url }}" class="card-link">
+            <div class="m-3">{{ card.front }}</div>
+            <hr>
+            <div class="m-3">{{ card.back }}</div>
+        </a>
     </div>
-    <form action="{% url 'quiz-create' %}" method="post">
-        {% csrf_token %}
-        <input type="hidden" name="deck_pk" value="{{ deck.pk }}">
-        <input type="submit" value="Review" class="review-button">
-    </form>
-    <div class="create-navigation">
-        <a href="{% url 'deck-update' pk=deck.pk %}">Edit</a>
-        <a href="{% url 'deck-delete' pk=deck.pk %}">Delete</a>
-        <a href="{% url 'card-create' deck_pk=deck.pk %}">New card</a>
-    </div>
-    <div class="d-grid gap-3">
-        {% for card in cards %}
-            <div class="border_rounded_position-relative">
-                <a href="{{ card.get_absolute_url }}" class="card-link">
-                    <div class="m-3">{{ card.front }}</div>
-                    <hr>
-                    <div class="m-3">{{ card.back }}</div>
-                </a>
-            </div>
-        {% endfor %}
-    </div>
+    {% endfor %}
+</div>
 {% endblock content %}
