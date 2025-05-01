@@ -60,7 +60,6 @@ class QuizNextView(View):
         quiz = Quiz.objects.get(pk=pk)
         quiz.index += 1
         quiz.save()
-        # Placeholder, we don't actually use the response for anything
         return JsonResponse({"success": 200})
 
 

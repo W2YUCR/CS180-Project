@@ -21,7 +21,6 @@ document.addEventListener('DOMContentLoaded', _ => {
             cardCounter.innerText = data['index'] + 1;
         }
 
-        // ✅ These should run regardless of `finished` status
         prevBtn.disabled = data['index'] === 0;
         nextBtn.disabled = data['index'] >= totalCards - 1;
     }
