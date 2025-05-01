@@ -1,7 +1,7 @@
 from channels.generic.websocket import AsyncJsonWebsocketConsumer
 from asgiref.sync import sync_to_async
 from typing import override, Optional
-from quiz.tasks import start_quiz
+from quiz.tasks import quiz_show
 
 
 class QuizWebSocketConsumer(AsyncJsonWebsocketConsumer):
@@ -18,7 +18,19 @@ class QuizWebSocketConsumer(AsyncJsonWebsocketConsumer):
     async def receive_json(self, content):
         match content:
             case {"action": "start"}:
-                await sync_to_async(start_quiz.send)(self.quiz_pk)
+                await sync_to_async(quiz_show.send)(self.quiz_pk)
 
-    async def quiz_start(self, event):
-        print("Received start signal")
+    async def quiz_timeout(self, event):
+        await self.send_json({"type": "timeout", "answer": event["answer"]})
+
+    async def quiz_show(self, event):
+        await self.send_json(
+            {
+                "type": "show",
+                "question": event["question"],
+                "end_time": event["end_time"],
+            }
+        )
+
+    async def quiz_end(self, event):
+        await self.send_json({"type": "end"})

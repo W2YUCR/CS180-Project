@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', _ => {
     const cardDiv = document.getElementById('card');
     const cardCounter = document.getElementById('card-counter');
+    const startBtn = document.getElementById('start-btn');
     const timer = document.getElementById('timer');
     const pk = JSON.parse(document.getElementById('quiz-pk').textContent);
 
@@ -12,6 +13,10 @@ document.addEventListener('DOMContentLoaded', _ => {
 
     function displayAnswer(answer) {
         cardDiv.innerText = answer;
+    }
+
+    function endReview() {
+        cardDiv.innerText = "Review finished.";
     }
 
     function setTimer(endTime) {
@@ -43,10 +48,13 @@ document.addEventListener('DOMContentLoaded', _ => {
                     break;
 
                 case 'show':
+                    startBtn.remove();
                     displayCard(data.question);
-                    setTimer(data.endTime);
+                    setTimer(data.end_time);
                     break;
-
+                case 'end':
+                    endReview();
+                    break
                 default:
                     break;
             }
@@ -58,4 +66,8 @@ document.addEventListener('DOMContentLoaded', _ => {
     }
 
     connect();
+
+    startBtn.addEventListener('click', _ => {
+        ws.send(JSON.stringify({ action: 'start' }));
+    });
 });
