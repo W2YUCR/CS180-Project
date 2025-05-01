@@ -10,10 +10,18 @@ A flashcards website
 pip install .
 ```
 
+## Run Redis
+
 ## Run the server
 
 ```sh
 python manage.py runserver
+```
+
+## Run dramatiq
+
+```sh
+python manage.py rundramatiq
 ```
 
 You should now be running a development server at `http://127.0.0.1:8000/`
