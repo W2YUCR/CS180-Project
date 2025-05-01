@@ -11,6 +11,7 @@ th, td {
     border: 3px solid #000000;
     background-color: #89CFF0;
     font-size: 24px;
+    color: #000000;
 }
 
 th {
@@ -19,4 +20,5 @@ th {
 
 a {
     text-decoration: none;
+    color: #000000;
 }
