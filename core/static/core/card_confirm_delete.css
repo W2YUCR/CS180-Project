@@ -1,0 +1,33 @@
+.btn-btn-primary {
+    background-color: green;
+    color: white;
+    border: 3px solid black;
+    border-radius: 20px;
+    padding: 15px;
+    margin: 5px;
+    font-family: "Courier New";
+    text-decoration: none;
+
+}
+
+.btn-btn-danger {
+    background-color: rgb(177, 0, 0);
+    color: white;
+    border: 3px solid black;
+    border-radius: 20px;
+    padding: 15px;
+    margin: 5px;
+    font-family: "Courier New";
+    text-decoration: none;
+}
+
+.delete-question p {
+    background-color: #0011ff;
+    color: white;
+    border: 3px solid black;
+    border-radius: 20px;
+    padding: 15px;
+    margin: 5px;
+    font-family: "Courier New";
+    text-decoration: none;
+}

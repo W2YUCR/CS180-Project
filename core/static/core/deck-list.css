@@ -1,0 +1,22 @@
+table {
+    width: 100%;
+    margin: 20px auto;
+    border-collapse: collapse;
+    font-family: "Courier New", sans-serif;
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+    border: 3px solid #000000;
+    background-color: #89CFF0;
+    font-size: 24px;
+}
+
+th {
+    background-color: #0015ff;
+}
+
+a {
+    text-decoration: none;
+}

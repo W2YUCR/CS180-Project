@@ -1,0 +1,10 @@
+<div class="card h-100">
+    <div class="card-body">
+        <h5 class="card-title">{{ deck.name }}</h5>
+        <p class="card-text">
+            By <a href="{% url 'user-profile' pk=deck.owner.pk %}">{{ deck.owner.username }}</a>
+        </p>
+        <p class="card-text">{{ deck.description }}</p>
+        <a href="{{ deck.get_absolute_url }}" class="btn btn-primary">View</a>
+    </div>
+</div>

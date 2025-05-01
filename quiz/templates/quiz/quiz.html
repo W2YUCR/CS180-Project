@@ -5,6 +5,7 @@
     <script src="{% static 'quiz/quiz.js' %}"></script>
 {% endblock scripts %}
 {% block content %}
+    <link rel="stylesheet" href="{% static 'core/quiz.css' %}">
     <p>
         Card <span id="card-counter"></span> of <span>{{ num_cards }}</span>
     </p>
@@ -13,5 +14,8 @@
         <button class="btn btn-primary" id="known-btn">Know</button>
         <button class="btn btn-primary" id="unknown-btn">Don't Know</button>
         <button class="btn btn-primary" id="next-btn">Next</button>
+    </div>
+    <div class="back-deck-button">
+        <a>Back to Deck</a>
     </div>
 {% endblock content %}

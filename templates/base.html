@@ -14,7 +14,7 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"
                 integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq"
                 crossorigin="anonymous"></script>
-        {% block scripts %}{% endblock %}
+        {% block scripts %}{% endblock scripts %}
     </head>
     <body>
         <div class="navbar">
@@ -39,7 +39,10 @@
                                 <a href="{% url 'create' %}" class="nav-link">Create</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link">Files</a>
+                                <a href="{% url 'decks' %}" class="nav-link">Flashcard Sets</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'shared-decks' %}">Shared</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link">Quiz</a>
@@ -62,12 +65,22 @@
                                 <a href="{% url 'login' %}" class="login_bt">Log in</a>
                             </div>
                         {% endif %}
+<<<<<<< HEAD
                     </div>
                 <!-- </div> -->
             <!-- </div> -->
         </div>
         <div class="">
             {% block content %}{% endblock %}
+=======
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div class="container mt-5">
+            {% block content %}
+            {% endblock content %}
+>>>>>>> 24a78d04ed4d4069ff5b0ce6e5af2a399ee2b3db
         </div>
     </body>
 </html>

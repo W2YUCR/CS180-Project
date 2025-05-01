@@ -1,7 +1,11 @@
 {% extends "base.html" %}
+{% load static %}
 {% block content %}
-    <a href="{{ card.deck.get_absolute_url }}">Back to deck</a>
-    <a href="{% url 'card-update' pk=card.pk %}">Edit</a>
-    <a href="{% url 'card-delete' pk=card.pk %}">Delete</a>
-    {% include 'decks/_card_preview.html' %}
+    <link rel="stylesheet" href="{% static 'core/card_detail.css' %}">
+    <div class="card-navigation">
+        <a href="{{ card.deck.get_absolute_url }}">Back to Deck</a>
+        <a href="{% url 'card-update' pk=card.pk %}">Edit</a>
+        <a href="{% url 'card-delete' pk=card.pk %}">Delete</a>
+    </div>
+    {% include "decks/_card_preview.html" %}
 {% endblock content %}
