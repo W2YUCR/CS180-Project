@@ -8,8 +8,12 @@ from django.shortcuts import get_object_or_404
 
 from quiz.models import Quiz
 from decks.models import Card, Deck
+import logging
 
 from typing import override
+
+# Create a logger instance
+logger = logging.getLogger('quiz')
 
 # Create your views here.
 class QuizView(TemplateView):
@@ -68,3 +72,12 @@ class QuizCreateView(View):
             quiz.cards.add(card, through_defaults={"index": i})
         quiz.save()
         return redirect(reverse_lazy("quiz-view", kwargs={"pk": quiz.pk}))
+    
+class QuizPrevView(View):
+    def post(self, request, *args, **kwargs):
+        pk = self.kwargs["pk"]
+        quiz = Quiz.objects.get(pk=pk)
+        if quiz.index > 0:
+            quiz.index -= 1
+            quiz.save()
+        return JsonResponse({"success": 200})
