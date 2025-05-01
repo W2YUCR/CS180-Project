@@ -33,28 +33,23 @@
                     <!-- <ul class="navbar-nav me-auto">
                         <li class="nav-item">
                             <a href="{% url 'index' %}" class="nav-link">Home</a>
-                        </li>
+                        </li>-->
                         {% if user.is_authenticated %}
-                            <li class="nav-item">
-                                <a href="{% url 'create' %}" class="nav-link">Create</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="{% url 'decks' %}" class="nav-link">Flashcard Sets</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{% url 'shared-decks' %}">Shared</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link">Quiz</a>
-                            </li>
+                        <div class="login_options"">
+                            <a href="{% url 'create' %}" class="login_hover">Create</a>
+                            <a href="{% url 'decks' %}" class="login_hover">Flashcard Sets</a>
+                            <a class="login_hover" href="{% url 'shared-decks' %}">Shared</a>
+                            <a class="login_hover">Quiz</a>
+                        </div>
                         {% endif %}
-                    </ul> -->
+                    </ul> 
                     <div class="nav_options">
                         {% if user.is_authenticated %}
+                        
                             <div class="">
                                 <form action="{% url 'logout' %}" method="post">
                                     {% csrf_token %}
-                                    <button type="submit" class="btn">Log Out</button>
+                                    <button type="submit" class="logout_bt">Log Out</button>
                                 </form>
                             </div>
                         {% else %}
@@ -65,22 +60,12 @@
                                 <a href="{% url 'login' %}" class="login_bt">Log in</a>
                             </div>
                         {% endif %}
-<<<<<<< HEAD
                     </div>
                 <!-- </div> -->
             <!-- </div> -->
         </div>
         <div class="">
             {% block content %}{% endblock %}
-=======
-                    </ul>
-                </div>
-            </div>
-        </nav>
-        <div class="container mt-5">
-            {% block content %}
-            {% endblock content %}
->>>>>>> 24a78d04ed4d4069ff5b0ce6e5af2a399ee2b3db
         </div>
     </body>
 </html>

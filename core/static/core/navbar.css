@@ -2,7 +2,7 @@ body {
     background-color: #E3EDEA;
     min-height: 100vh;
 
-a {
+a, button {
     text-decoration: none;
     color: black;
 }
@@ -12,7 +12,6 @@ a {
     width: 100%;
     height: 13vh;
     box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.4);
-
 }
 
 .logo {
@@ -20,6 +19,7 @@ a {
     text-decoration: none;
     font-size: 350%;   
     margin-left: 2%;
+    margin-bottom: 0.5%;
 }
 .nav_options {
     display: flex;
@@ -28,12 +28,19 @@ a {
     padding-right: 2%;
     gap: 5rem;
     font-size: 200%;
-
+    align-items: center;
 }
-.create_account:hover {
+.create_account:hover, .login_hover:hover {
     text-decoration: underline;
 }
-.login_bt:hover {
+.login_options {
+    display: flex;
+    gap: 2rem;
+    color: black;
+    font-size: 200%;
+    margin-right: 40%;
+}
+.login_bt:hover, .logout_bt:hover {
     background-color: #B8C3BD;
 }
 .login_bt {
@@ -41,6 +48,15 @@ a {
     border-radius: 30px;
     padding: 15px 50px ;
     box-shadow: 0 2px 4px;
+}
+.logout_bt {
+    background-color: #E3EDEA;
+    border: none; 
+    border-radius: 30px;
+    padding: 15px 50px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    text-decoration: none;
+    outline: none;
 }
 
 /* .title {

@@ -11,7 +11,7 @@
     width: 99%;
     display: flex;
     flex-direction: column;
-    row-gap: 3rem;
+    row-gap: 1rem;
     margin-left: 3%;
 } 
 .home_card_set {

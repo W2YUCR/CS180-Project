@@ -22,24 +22,24 @@
         <p>If you do not have an account, click the "Create Account" button.<br></p>
         <p>If you do have an account, click the "Login" button.<br></p>
     </div>
-    <div class="home_card_set">
-        <div class="home_card">
-            <p class="home_card_text">Flashcards</p>
-            <div class="home_flashcard"></div>
-            <p class="dna_text">DNA</p>
-            <img src="{% static 'image/dna.webp' %}"  class="dna">
-        </div>
-        <div class="home_card">
-            <p class="home_card_text">Quiz</p>
-            <div class="question_card"></div>
-            <img src="{% static 'image/question.webp' %}"  class="question">
-            <p class="true">True</p>
-            <p class="false">False</p>
-        </div>
-    </div>
+
 
 
 {% endif %}
+<div class="home_card_set">
+    <div class="home_card">
+        <p class="home_card_text">Flashcards</p>
+        <div class="home_flashcard"></div>
+        <p class="dna_text">DNA</p>
+        <img src="{% static 'image/dna.webp' %}"  class="dna">
+    </div>
+    <div class="home_card">
+        <p class="home_card_text">Quiz</p>
+        <div class="question_card"></div>
+        <img src="{% static 'image/question.webp' %}"  class="question">
+        <p class="true">True</p>
+        <p class="false">False</p>
+    </div>
+</div>
 </div>
 {% endblock %}
-{% endblock content %}
