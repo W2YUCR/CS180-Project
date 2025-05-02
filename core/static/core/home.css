@@ -1,0 +1,110 @@
+.home {
+    display: flex;
+    justify-content: center;
+    margin-top: 10vh;
+    gap: 5%;
+
+}
+.introduction {
+    color: black;
+    font-size: 1.5rem;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    row-gap: 1rem;
+    margin-left: 3vw;
+} 
+.home_card_set {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    gap: 5rem;
+}
+.home_card {
+    background-color: #21B78F;
+    width: 18vw;
+    height: 45vh;
+    margin-top: 4vh;
+    border-radius: 25px;
+    box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.3);
+    position: relative;
+    transition: transform 0.3s ease-in-out 0s;
+}
+.home_card:hover {
+    transform: scale(1.1);
+}
+.home_card_text {
+    font-size: 2.5rem;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin-top: 5vh;
+    color: white;
+}
+.home_flashcard {
+    background-color: white;   
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(10deg);
+    padding: 11vh 7vw;
+    border-radius: 25px;
+    top: 25vh;
+    box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.2);
+    
+}
+.dna_text {
+    color: black;
+    position: absolute;
+    left: 8.5vw;
+    top: 15vh;
+    font-size: 1.5rem;
+    transform: rotate(10deg);
+}
+.dna {
+    position: absolute;
+    left: 48%;
+    transform: translate(-50%, -50%) rotate(10deg);
+    top: 25vh;
+    width: 8vw;
+}
+.question_card {
+    background-color: white;   
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, -50%) ;
+    padding: 7vh 7vw;
+    border-radius: 25px;
+    top: 18vh;
+    box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.2);
+}
+.question {
+    position: absolute;
+    left: 48%;
+    transform: translate(-50%, -50%) rotate(10deg);
+    top: 18vh;
+    width: 8vw;
+}
+.true {
+    background-color: white;   
+    position: absolute;
+    left: 5vw;
+    transform: translate(-50%, -50%) ;
+    padding: 2% 10%;
+    border-radius: 15px;
+    top: 31vh;
+    box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.2);
+    color: black;
+    font-size: 1.5rem;
+}
+.false {
+    background-color: white;   
+    position: absolute;
+    left:13vw;
+    transform: translate(-50%, -50%) ;
+    padding: 2% 10%;
+    border-radius: 15px;
+    top: 31vh;
+    box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.2);
+    color: black;
+    font-size: 1.5rem;
+}
