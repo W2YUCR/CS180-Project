@@ -7,15 +7,16 @@
 {% block content %}
     <link rel="stylesheet" href="{% static 'core/quiz.css' %}">
     <p>
-        Card <span id="card-counter"></span> of <span>{{ num_cards }}</span>
+        Card <span id="card-counter"></span> of <span id="card-total">{{ num_cards }}</span>
     </p>
     <div class="border rounded m-3" id="card"></div>
     <div class="btn-group" role="group">
-        <button class="btn btn-primary" id="known-btn">Know</button>
-        <button class="btn btn-primary" id="unknown-btn">Don't Know</button>
-        <button class="btn btn-primary" id="next-btn">Next</button>
+        <button type="button" class="btn btn-primary" id="prev-btn">Prev</button>
+        <button type="button" class="btn btn-primary" id="known-btn">Know</button>
+        <button type="button" class="btn btn-primary" id="unknown-btn">Don't Know</button>
+        <button type="button" class="btn btn-primary" id="next-btn">Next</button>
     </div>
     <div class="back-deck-button">
-        <a>Back to Deck</a>
+        <a href="{{ deck.get_absolute_url }}">Back to Deck</a>
     </div>
 {% endblock content %}

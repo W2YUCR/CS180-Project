@@ -5,14 +5,12 @@
   <table>
     <thead>
       <tr>
-        <th>ID</th>
         <th>Flashcard Sets</th>
       </tr>
     </thead>
     <tbody>
       {% for deck in deck_list %}
         <tr>
-          <td>{{ deck.id }}</td>
           <td>
             <a href="{{ deck.id }}">{{ deck.name }}</a>
           </td>
