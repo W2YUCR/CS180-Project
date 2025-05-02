@@ -1,8 +1,10 @@
 from django.test import TestCase
 from django.urls import reverse
 from django.contrib.auth.models import User
+from typing import override
 
 class SignUpViewTests(TestCase):
+    @override
     def setUp(self):
         self.url = reverse('signup')
 
