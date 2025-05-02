@@ -1,4 +1,4 @@
-.deck-info{
+.deck-info {
     background-color: #007bff;
     color: white;
     border: 5px solid black;
@@ -17,7 +17,7 @@
     text-decoration: none;
 }
 
-input  {
+input {
     background-color: #0011ff;
     color: white;
     border: 3px solid black;
@@ -28,7 +28,7 @@ input  {
     text-decoration: none;
 }
 
-.create-navigation{
+.create-navigation {
     margin-top: 30px;
     margin-bottom: 20px;
 }
@@ -59,4 +59,8 @@ input  {
     clip: rect(0, 0, 0, 0);
     white-space: nowrap;
     border: 0;
+}
+
+.create-navigation a:hover {
+    background-color: #0069d9;
 }

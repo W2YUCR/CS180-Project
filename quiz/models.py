@@ -1,3 +1,4 @@
+# quiz/models.py
 from django.db import models
 from decks.models import Card, Deck
 

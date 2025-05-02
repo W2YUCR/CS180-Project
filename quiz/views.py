@@ -1,3 +1,5 @@
+#quiz/views.py
+import random
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.http import JsonResponse, HttpResponse
@@ -67,7 +69,9 @@ class QuizCreateView(View):
     def post(self, request, *args, **kwargs):
         deck = Deck.objects.get(pk=request.POST.get("deck_pk"))
         quiz = Quiz.objects.create(deck=deck, index=0)
-        for i, card in enumerate(Card.objects.filter(deck=deck)):
+        cards = list(Card.objects.filter(deck = deck))
+        random.shuffle(cards)
+        for i, card in enumerate(cards):
             quiz.cards.add(card, through_defaults={"index": i})
         quiz.save()
         return redirect(reverse_lazy("quiz-view", kwargs={"pk": quiz.pk}))
