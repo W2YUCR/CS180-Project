@@ -1,18 +1,18 @@
 .home {
     display: flex;
     justify-content: center;
-    margin-top: 5%;
+    margin-top: 10vh;
     gap: 5%;
 
 }
 .introduction {
     color: black;
     font-size: 1.5rem;
-    width: 99%;
+    width: 100%;
     display: flex;
     flex-direction: column;
     row-gap: 1rem;
-    margin-left: 3%;
+    margin-left: 3vw;
 } 
 .home_card_set {
     display: flex;
@@ -22,9 +22,9 @@
 }
 .home_card {
     background-color: #21B78F;
-    width: 38%;
+    width: 18vw;
     height: 45vh;
-    margin-top: 4%;
+    margin-top: 4vh;
     border-radius: 25px;
     box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.3);
     position: relative;
@@ -38,7 +38,7 @@
     position: absolute;
     left: 50%;
     transform: translate(-50%, -50%);
-    margin-top: 15%;
+    margin-top: 5vh;
     color: white;
 }
 .home_flashcard {
@@ -46,17 +46,17 @@
     position: absolute;
     left: 50%;
     transform: translate(-50%, -50%) rotate(10deg);
-    padding: 29% 40%;
+    padding: 11vh 7vw;
     border-radius: 25px;
-    top: 55%;
+    top: 25vh;
     box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.2);
     
 }
 .dna_text {
     color: black;
     position: absolute;
-    left: 45%;
-    top: 35%;
+    left: 8.5vw;
+    top: 15vh;
     font-size: 1.5rem;
     transform: rotate(10deg);
 }
@@ -64,34 +64,34 @@
     position: absolute;
     left: 48%;
     transform: translate(-50%, -50%) rotate(10deg);
-    top: 58%;
-    width: 45%;
+    top: 25vh;
+    width: 8vw;
 }
 .question_card {
     background-color: white;   
     position: absolute;
     left: 50%;
     transform: translate(-50%, -50%) ;
-    padding: 18% 39%;
+    padding: 7vh 7vw;
     border-radius: 25px;
-    top: 40%;
+    top: 18vh;
     box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.2);
 }
 .question {
     position: absolute;
     left: 48%;
     transform: translate(-50%, -50%) rotate(10deg);
-    top: 40%;
-    width: 45%;
+    top: 18vh;
+    width: 8vw;
 }
 .true {
     background-color: white;   
     position: absolute;
-    left: 29%;
+    left: 5vw;
     transform: translate(-50%, -50%) ;
     padding: 2% 10%;
     border-radius: 15px;
-    top: 70%;
+    top: 31vh;
     box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.2);
     color: black;
     font-size: 1.5rem;
@@ -99,11 +99,11 @@
 .false {
     background-color: white;   
     position: absolute;
-    left: 71%;
+    left:13vw;
     transform: translate(-50%, -50%) ;
     padding: 2% 10%;
     border-radius: 15px;
-    top: 70%;
+    top: 31vh;
     box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.2);
     color: black;
     font-size: 1.5rem;

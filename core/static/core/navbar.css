@@ -18,7 +18,7 @@ a, button {
     color: black;
     text-decoration: none;
     font-size: 3rem;   
-    margin-left: 2%;
+    margin-left: 2vw;
 }
 .nav_options {
     display: flex;
@@ -37,7 +37,7 @@ a, button {
     gap: 2rem;
     color: black;
     font-size: 1.5rem;
-    margin-right: 40%;
+    margin-right: 50vw;
 }
 .login_bt:hover, .logout_bt:hover {
     background-color: #B8C3BD;
@@ -45,14 +45,14 @@ a, button {
 .login_bt {
     background-color: #E3EDEA;
     border-radius: 30px;
-    padding: 15px 50px ;
+    padding: 2vh 2.5vw ;
     box-shadow: 0 2px 4px;
 }
 .logout_bt {
     background-color: #E3EDEA;
     border: none; 
     border-radius: 30px;
-    padding: 15px 50px;
+    padding: 2vh 2.5vw ;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     text-decoration: none;
     outline: none;
