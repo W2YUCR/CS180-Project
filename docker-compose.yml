@@ -10,6 +10,11 @@ services:
     depends_on:
       db:
         condition: service_healthy
+    develop:
+      watch:
+        - path: .
+          target: .
+          action: sync
   dramatiq:
     build: .
     restart: always
@@ -19,6 +24,11 @@ services:
     depends_on:
       redis:
         condition: service_healthy
+    develop:
+      watch:
+        - path: .
+          target: .
+          action: sync
   redis:
     image: redis
     restart: always
