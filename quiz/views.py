@@ -1,3 +1,4 @@
+#quiz/views.py
 import random
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
