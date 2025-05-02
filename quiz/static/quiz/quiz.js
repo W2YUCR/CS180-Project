@@ -1,3 +1,5 @@
+//CS180-Project/quiz/static/quiz/quiz.js
+
 const csrftoken = Cookies.get('csrftoken');
 document.addEventListener('DOMContentLoaded', _ => {
     const cardDiv = document.getElementById('card');

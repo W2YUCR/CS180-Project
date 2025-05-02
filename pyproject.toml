@@ -15,6 +15,8 @@ plugins = ["mypy_django_plugin.main"]
 explicit_package_bases = true
 check_untyped_defs = true
 enable_error_code = "explicit-override"
+exclude = "^build/"
+
 
 [tool.django-stubs]
 django_settings_module = "flashcards.settings"

@@ -1,3 +1,5 @@
+# decks/views.py
+import random 
 from django.http.request import HttpRequest
 from django.urls import reverse_lazy
 from django.shortcuts import render
@@ -46,12 +48,18 @@ class ShareableDeckMixin(LoginRequiredMixin, PermissionRequiredMixin):
 class DeckDetailView(ShareableDeckMixin, DetailView):
     model = Deck
     context_object_name = "deck"
-
     @override
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["cards"] = Card.objects.filter(deck=self.get_object())
+        cards = list(Card.objects.filter(deck=self.get_object()))
+
+        if self.request.GET.get("shuffle") == "true":
+            random.shuffle(cards)
+
+        context["cards"] = cards
+        context["shuffled"] = self.request.GET.get("shuffle") == "true"
         return context
+
 
 
 class DeckCreateView(LoginRequiredMixin, CreateView):
@@ -139,3 +147,5 @@ class CardDeleteView(RestrictedToCardOwnerMixin, DeleteView):
     @override
     def get_success_url(self):
         return self.get_object().deck.get_absolute_url()
+
+ 
