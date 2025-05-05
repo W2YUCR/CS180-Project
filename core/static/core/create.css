@@ -5,8 +5,8 @@
   font-size: 25px;
   text-align: center;
   font-family: "Courier New";
-  background-color: #007bff;
-  color: #ffffff;
+  background-color: #B8C3BD;
+  color: #000000;
 }
 
 .instructions-list {
@@ -16,18 +16,18 @@
   font-size: 18px;
   text-align: left;
   font-family: "Courier New";
-  background-color: #007bff;
-  color: #ffffff;
+  background-color: #B8C3BD;
+  color: #000000;
 }
 
 .create-deck-button a {
-  background-color: #007bff;
-  color: white;
+  background-color: #B8C3BD;
+  color: rgb(0, 0, 0);
   padding: 10px 20px;
   border-radius: 8px;
   width: 150px;
   height: auto;
-  border: 1px solid #007bff;
+  border: 1px solid #B8C3BD;
   cursor: pointer;
   font-weight: bold;
   font-family: "Courier New";
