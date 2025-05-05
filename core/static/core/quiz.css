@@ -19,3 +19,18 @@
     font-family: "Courier New";
     text-decoration: none;
 }
+
+.border_rounded_m-3 {
+    color: black;
+    background-color: white;
+}
+
+p {
+    color: black;
+    margin-top: 30px;
+}
+
+.btn-group {
+    color: black;
+    background-color: #c8d2cf;
+}
