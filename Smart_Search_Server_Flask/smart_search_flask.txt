@@ -1,10 +1,27 @@
-
 from flask import Flask, jsonify, request, render_template_string
+import os
 
 app = Flask(__name__)
 
-# Store all submitted strings
-all_strings = []
+# File to store flashcards
+user_home = os.path.expanduser('~')  # Always /home/yourusername
+flashcards_file = os.path.join(user_home, 'AllFlashcards.txt')
+
+# Load existing flashcards into memory
+def load_flashcards():
+	if os.path.exists(flashcards_file):
+    	with open(flashcards_file, 'r', encoding='utf-8') as f:
+        	return [line.strip() for line in f.readlines()]
+	return []
+
+# Save flashcards to file
+def save_flashcards(flashcards):
+	with open(flashcards_file, 'w', encoding='utf-8') as f:
+    	for item in flashcards:
+        	f.write(item + '\n')
+
+# Initialize flashcards
+all_strings = load_flashcards()
 
 # Updated HTML form template
 form_html = '''
@@ -56,6 +73,7 @@ def get_value():
     	# Insert new string if provided
     	if user_input:
         	all_strings.append(user_input)
+        	save_flashcards(all_strings)
     	results = all_strings
 
 	elif insert_or_not == 0:
@@ -79,4 +97,5 @@ def get_value():
 
 if __name__ == '__main__':
 	app.run(debug=True)
+
 
