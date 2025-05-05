@@ -19,21 +19,21 @@
 {% csrf_token %}
 <table>
 <tr>
-    <td>{{ form.username.label_tag }}</td>
+    <td style="color: black; margin-top: 30px;">{{ form.username.label_tag }}</td>
     <td>{{ form.username }}</td>
 </tr>
 <tr>
-    <td>{{ form.password.label_tag }}</td>
+    <td style="color: black;">{{ form.password.label_tag }}</td>
     <td>{{ form.password }}</td>
 </tr>
 </table>
 
-<input type="submit" value="login">
+<input type="submit" value="login" style="background-color: #BFD0CD; color: rgb(0, 0, 0); border: 3px solid black;">
 <input type="hidden" name="next" value="{{ next }}">
 </form>
 
 {# Assumes you set up the password_reset view in your URLconf #}
-<p>No account? <a href="{% url 'signup' %}">Sign up</a></p>
+<p style="color: rgb(0, 0, 0);">No account? <a href="{% url 'signup' %}">Sign up</a></p>
 <p><a href="{% url 'password_reset' %}">Lost password?</a></p>
 
 {% endblock content %}
