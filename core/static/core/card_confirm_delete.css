@@ -1,4 +1,4 @@
-.btn-btn-primary {
+.btn-primary {
     background-color: green;
     color: white;
     border: 3px solid black;
@@ -7,10 +7,9 @@
     margin: 5px;
     font-family: "Courier New";
     text-decoration: none;
-
 }
 
-.btn-btn-danger {
+.btn-danger {
     background-color: rgb(177, 0, 0);
     color: white;
     border: 3px solid black;
@@ -30,4 +29,26 @@
     margin: 5px;
     font-family: "Courier New";
     text-decoration: none;
+}
+
+.btn-cancel {
+    background-color: #c8d2cf;
+    color: black;
+    border: 3px solid black;
+    border-radius: 20px;
+    padding: 15px;
+    margin: 5px;
+    font-family: "Courier New";
+    text-decoration: none;
+}
+
+.btn-confirm {
+    background-color: #BFD0CD;
+    color: black;
+    border: 3px solid black;
+    border-radius: 20px;
+    padding: 15px;
+    margin: 5px;
+    font-family: "Courier New";
+    cursor: pointer;
 }
