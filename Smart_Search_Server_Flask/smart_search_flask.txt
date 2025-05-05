@@ -4,26 +4,21 @@ import os
 app = Flask(__name__)
 
 # File to store flashcards
-user_home = os.path.expanduser('~')  # Always /home/yourusername
+user_home = os.path.expanduser('~') 
 flashcards_file = os.path.join(user_home, 'AllFlashcards.txt')
 
-# Load existing flashcards into memory
 def load_flashcards():
 	if os.path.exists(flashcards_file):
     	with open(flashcards_file, 'r', encoding='utf-8') as f:
         	return [line.strip() for line in f.readlines()]
 	return []
 
-# Save flashcards to file
 def save_flashcards(flashcards):
 	with open(flashcards_file, 'w', encoding='utf-8') as f:
     	for item in flashcards:
         	f.write(item + '\n')
-
-# Initialize flashcards
 all_strings = load_flashcards()
 
-# Updated HTML form template
 form_html = '''
 <!DOCTYPE html>
 <html>
@@ -33,8 +28,11 @@ form_html = '''
 <body>
 	<h1>Enter a String</h1>
 	<form action="/api/value" method="get">
-    	<label for="user_string">Your String:</label>
-    	<input type="text" id="user_string" name="user_string" placeholder="Enter your text here"><br><br>
+    	<label for="user_string">Your String:</label><br>
+    	<textarea id="user_string" name="user_string" rows="5" cols="50" placeholder="Enter your text here..."></textarea><br><br>
+
+    	<label for="user_id">Flashcard ID (optional):</label>
+    	<input type="number" id="user_id" name="user_id" placeholder="Defaults to 0"><br><br>
 
     	<label for="insertOrNot">Insert? (1 = yes, 0 = search):</label>
     	<input type="number" id="insertOrNot" name="insertOrNot" min="0" max="1" value="1"><br><br>
@@ -46,7 +44,7 @@ form_html = '''
     	<h2>Results:</h2>
     	<ul>
     	{% for val in values %}
-        	<li>{{ val }}</li>
+        	<li style="white-space: pre-line;">{{ val }}</li>
     	{% endfor %}
     	</ul>
 	{% endif %}
@@ -62,30 +60,29 @@ def index():
 def get_value():
 	global all_strings
 
-	# Get user input
 	user_input = request.args.get('user_string', type=str)
 	insert_or_not = request.args.get('insertOrNot', default=1, type=int)
+	user_id = request.args.get('user_id', default=0, type=int)
 
-	# Initialize results
 	results = []
 
 	if insert_or_not == 1:
     	# Insert new string if provided
     	if user_input:
-        	all_strings.append(user_input)
+        	flashcard = f"[ID: {user_id}] {user_input}"
+        	all_strings.append(flashcard)
         	save_flashcards(all_strings)
     	results = all_strings
 
 	elif insert_or_not == 0:
     	if not user_input:
-        	# No input, return all stored strings
         	results = all_strings
     	else:
         	# Search: split input into words and find matching strings
         	input_words = set(user_input.lower().split())
         	for s in all_strings:
             	string_words = set(s.lower().split())
-            	if input_words & string_words:  # Intersection is not empty
+            	if input_words & string_words:  
                 	results.append(s)
 
 	# If the request is from a browser form, return HTML
