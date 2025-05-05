@@ -1,0 +1,40 @@
+.error-message {
+    background-color: yellow;
+    color: red;
+    margin-top: 30px;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.info-message {
+    color: black;
+    margin-top: 30px;
+    font-family: "Courier New", monospace;
+}
+
+.login-form {
+    margin-top: 30px;
+    color: black;
+    font-family: "Courier New", monospace;
+}
+
+.label {
+    color: black;
+    padding-right: 10px;
+}
+
+.login-button {
+    background-color: #BFD0CD;
+    color: black;
+    border: 3px solid black;
+    border-radius: 10px;
+    padding: 10px 20px;
+    margin-top: 10px;
+    font-family: "Courier New", monospace;
+}
+
+.auth-links {
+    color: black;
+    margin-top: 10px;
+    font-family: "Courier New", monospace;
+}
