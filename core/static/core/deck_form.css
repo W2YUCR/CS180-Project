@@ -1,15 +1,15 @@
+.deck-form {
+    margin-top: 100px;
+    color: black;
+}
+
 .save-button3 {
     text-decoration: none;
-    background-color: #B8C3BD;
+    background-color: #BFD0CD;
     color: black;
     border: 3px solid black;
     border-radius: 20px;
     padding: 15px;
     margin: 10px;
     font-family: "Courier New";
-}
-
-.form-container {
-    margin-top: 100px;
-    padding: 0 2vw;
 }
