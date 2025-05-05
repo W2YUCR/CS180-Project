@@ -2,7 +2,7 @@
 {% load static %}
 {% block content %}
 <link rel="stylesheet" href="{% static 'core/deck_form.css' %}">
-<form method="post">{% csrf_token %}
+<form method="post" style="margin-top: 100px; color: black;">{% csrf_token %}
     {{ form.as_p }}
     <input type="submit" value="Save" class="save-button3">
 </form>
