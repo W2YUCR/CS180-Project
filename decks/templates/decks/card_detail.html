@@ -2,7 +2,7 @@
 {% load static %}
 {% block content %}
     <link rel="stylesheet" href="{% static 'core/card_detail.css' %}">
-    <div class="card-navigation">
+    <div class="card-navigation" style="margin-top: 30px;">
         <a href="{{ card.deck.get_absolute_url }}">Back to Deck</a>
         <a href="{% url 'card-update' pk=card.pk %}">Edit</a>
         <a href="{% url 'card-delete' pk=card.pk %}">Delete</a>
