@@ -1,5 +1,7 @@
 {% extends "base.html" %}
+{% load static %}
 {% block content %}
+    <link rel="stylesheet" href="{% static 'core/shared.css' %}">
     <form class="d-flex" role="search" style="margin-top: 30px;">
         <input class="form-control me-2"
                name="search"
@@ -9,9 +11,9 @@
         <button class="btn btn-success" type="submit">Search</button>
     </form>
     {% if search %}
-        <p style="color: black;">Results for: "{{ search }}"</p>
+        <p class="result-decks">Results for: "{{ search }}"</p>
     {% else %}
-        <p style="color: black;">All shared decks</p>
+        <p class="deck-labels">All shared decks</p>
     {% endif %}
     {% include "decks/_deck_list.html" with deck_list=deck_list %}
 {% endblock content %}
