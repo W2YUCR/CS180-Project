@@ -52,3 +52,7 @@
     font-family: "Courier New";
     cursor: pointer;
 }
+
+.delete-question {
+    margin-top: 30px;
+}

@@ -1,7 +1,12 @@
+.card-form {
+    color: black !important;
+    margin-top: 30px !important;
+}
+
 .save-button2 {
     text-decoration: none;
     background-color: #BFD0CD;
-    color: black;
+    color: black !important;
     border: 3px solid black;
     border-radius: 20px;
     padding: 15px;
@@ -11,11 +16,25 @@
 
 textarea {
     background-color: white;
-    color: black;
+    color: black !important;
     min-height: 150px;
     padding: 10px;
     font-family: "Courier New", monospace;
     border: 2px solid black;
     border-radius: 10px;
     resize: vertical;
+}
+
+input, select, textarea {
+    color: black !important;
+}
+
+input[type="submit"] {
+    background-color: #BFD0CD;
+    color: black !important;
+    border: 3px solid black;
+    border-radius: 20px;
+    padding: 15px;
+    margin: 10px;
+    font-family: "Courier New";
 }
