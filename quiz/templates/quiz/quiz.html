@@ -6,11 +6,11 @@
 {% endblock scripts %}
 {% block content %}
     <link rel="stylesheet" href="{% static 'core/quiz.css' %}">
-    <p>
+    <p style="color: black; margin-top: 30px;">
         Card <span id="card-counter"></span> of <span id="card-total">{{ num_cards }}</span>
     </p>
-    <div class="border rounded m-3" id="card"></div>
-    <div class="btn-group" role="group">
+    <div class="border rounded m-3" id="card" style="color: black;"></div>
+    <div class="btn-group" role="group" style="color: black; background-color: #c8d2cf;">
         <button type="button" class="btn btn-primary" id="prev-btn">Prev</button>
         <button type="button" class="btn btn-primary" id="known-btn">Know</button>
         <button type="button" class="btn btn-primary" id="unknown-btn">Don't Know</button>
