@@ -33,17 +33,14 @@ def load_flashcards():
             return cards
     return []
 
-# Save flashcards to file
 def save_flashcards(cards):
     with open(flashcards_file, 'w', encoding='utf-8') as f:
         for card in cards:
             line = f"[ID: {card['id']}, Frequencies: {card['frequencies']}] {card['content']}"
             f.write(line + '\n')
 
-# Initialize flashcards
 all_flashcards = load_flashcards()
 
-# HTML form
 form_html = '''
 <!DOCTYPE html>
 <html>
@@ -109,6 +106,7 @@ def index():
     return render_template_string(form_html, values=None)
 
 @app.route('/api/value', methods=['GET'])
+@app.route('/api/value', methods=['GET'])
 def get_value():
     global all_flashcards
 
@@ -119,7 +117,6 @@ def get_value():
     results = []
 
     if insert_or_not == 1:
-        # Insert: handle multiple flashcards by splitting on newlines
         if user_input:
             lines = user_input.split('\n')
             for line in lines:
@@ -134,14 +131,12 @@ def get_value():
                     all_flashcards.append(card)
                     save_flashcards(all_flashcards)
 
-
         results = [
             f"[ID: {card['id']}, Frequencies: {card['frequencies']}] {card['content']}"
             for card in all_flashcards
         ]
 
     elif insert_or_not == 0:
-        # Search
         if not user_input:
             results = [
                 f"[ID: {card['id']}, Frequencies: {card['frequencies']}] {card['content']}"
@@ -158,8 +153,7 @@ def get_value():
                 if score > 0:
                     scored_cards.append((score, card))
 
-            # Sort descending by score
-            scored_cards.sort(reverse=True)
+            scored_cards.sort(key=lambda x: x[0], reverse=True)  # Sort by score (first element of tuple)
             results = [
                 f"[ID: {card['id']}, Frequencies: {card['frequencies']}] {card['content']}"
                 for score, card in scored_cards
@@ -171,6 +165,7 @@ def get_value():
 
     # Otherwise JSON
     return jsonify({'strings': results})
+
 
 if __name__ == '__main__':
     app.run(debug=True)
