@@ -9,8 +9,8 @@
 }
 
 .back-deck-button {
-    background-color: #0011ff;
-    color: white;
+    background-color: #B8C3BD;
+    color: black;
     border: 3px solid black;
     border-radius: 20px;
     padding: 15px;
@@ -18,4 +18,19 @@
     width: 153px;
     font-family: "Courier New";
     text-decoration: none;
+}
+
+.border_rounded_m-3 {
+    color: black;
+    background-color: white;
+}
+
+p {
+    color: black;
+    margin-top: 30px;
+}
+
+.btn-group {
+    color: black;
+    background-color: #c8d2cf;
 }
