@@ -94,6 +94,9 @@
 .error_message, .info_message {
     color: red;
 }
-.small_margin {
-    
+.small_margin_left {
+    margin-left: .7vw;
+}
+.small_margin_bot {
+    margin-bottom: 4vh;
 }

@@ -2,20 +2,18 @@
 {% load static %}
 {% block content %}
 <link rel="stylesheet" href="{% static 'core/login.css' %}">
-
-
 <div class="login_container">
     <p class="login_page_title">Login</p>
     <form method="post" action="{% url 'login' %}">
         {% csrf_token %}
         <div>
                 <div class="label">{{ form.username.label_tag }}</div>
-                <div class="login_bar" style="margin-bottom: 4vh;">{{ form.username }}</div>
+                <div class="login_bar small_margin_bot">{{ form.username }}</div>
                 <div class="label">{{ form.password.label_tag }}</div>
                 <div class="login_bar">{{ form.password }}</div>
                 <p>
                     <a class="login_underline" href="{% url 'password_reset' %}">Forgot password?</a>
-                    <a class="login_underline small_margin" href="{% url 'signup' %}"> Sign up?</a>
+                    <a class="login_underline small_margin_left" href="{% url 'signup' %}"> Sign up?</a>
                 </p>
         </div>
         {% if form.errors %}
