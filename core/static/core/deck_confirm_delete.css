@@ -1,0 +1,16 @@
+.btn-cancel {
+    color: black;
+    background-color: #c8d2cf;
+    border: 2px solid black;
+}
+
+.btn-confirm {
+    color: black;
+    background-color: #BFD0CD;
+    border: 2px solid black;
+}
+
+.delete-deck-form {
+    color: black;
+    margin-top: 30px;
+}

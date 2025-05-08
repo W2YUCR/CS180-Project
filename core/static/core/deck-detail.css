@@ -1,15 +1,16 @@
 .deck-info {
-    background-color: #007bff;
-    color: white;
+    background-color: #a3aca7;
+    color: black;
     border: 5px solid black;
     padding: 10px;
     margin-bottom: 20px;
+    margin-top: 30px;
     font-family: "Courier New";
 }
 
 .create-navigation a {
-    background-color: #007bff;
-    color: white;
+    background-color: #E3EDEA;
+    color: black;
     border: 3px solid black;
     padding: 15px;
     margin: 5px;
@@ -18,8 +19,8 @@
 }
 
 input {
-    background-color: #0011ff;
-    color: white;
+    background-color: #B8C3BD;
+    color: black;
     border: 3px solid black;
     border-radius: 20px;
     padding: 15px;
@@ -59,8 +60,4 @@ input {
     clip: rect(0, 0, 0, 0);
     white-space: nowrap;
     border: 0;
-}
-
-.create-navigation a:hover {
-    background-color: #0069d9;
 }

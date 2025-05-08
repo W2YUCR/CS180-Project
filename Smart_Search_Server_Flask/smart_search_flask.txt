@@ -1,82 +1,171 @@
-
 from flask import Flask, jsonify, request, render_template_string
+import os
+import re
+import nltk
+from nltk.corpus import wordnet
+
+nltk.download('wordnet')
+nltk.download('omw-1.4')
 
 app = Flask(__name__)
 
-# Store all submitted strings
-all_strings = []
+user_home = os.path.expanduser('~')
+flashcards_file = os.path.join(user_home, 'AllFlashcards.txt')
 
-# Updated HTML form template
+def load_flashcards():
+    if os.path.exists(flashcards_file):
+        with open(flashcards_file, 'r', encoding='utf-8') as f:
+            cards = []
+            for line in f:
+                line = line.strip()
+                if line:
+                    # Line format: [ID: 0, Frequencies: {...}] content
+                    match = re.match(r'\[ID: (\d+), Frequencies: (.*?)\](.*)', line)
+                    if match:
+                        id_num = int(match.group(1))
+                        freq_str = match.group(2)
+                        content = match.group(3).strip()
+                        try:
+                            freq_dict = eval(freq_str)
+                        except:
+                            freq_dict = {}
+                        cards.append({'id': id_num, 'frequencies': freq_dict, 'content': content})
+            return cards
+    return []
+
+def save_flashcards(cards):
+    with open(flashcards_file, 'w', encoding='utf-8') as f:
+        for card in cards:
+            line = f"[ID: {card['id']}, Frequencies: {card['frequencies']}] {card['content']}"
+            f.write(line + '\n')
+
+all_flashcards = load_flashcards()
+
 form_html = '''
 <!DOCTYPE html>
 <html>
 <head>
-	<title>String Echo</title>
+    <title>Flashcard App</title>
 </head>
 <body>
-	<h1>Enter a String</h1>
-	<form action="/api/value" method="get">
-    	<label for="user_string">Your String:</label>
-    	<input type="text" id="user_string" name="user_string" placeholder="Enter your text here"><br><br>
+    <h1>Enter a Flashcard</h1>
+    <form action="/api/value" method="get">
+        <label for="user_string">Your String:</label><br>
+        <textarea id="user_string" name="user_string" rows="5" cols="50" placeholder="Enter your text here..."></textarea><br><br>
 
-    	<label for="insertOrNot">Insert? (1 = yes, 0 = search):</label>
-    	<input type="number" id="insertOrNot" name="insertOrNot" min="0" max="1" value="1"><br><br>
+        <label for="user_id">Flashcard ID (optional):</label>
+        <input type="number" id="user_id" name="user_id" placeholder="Defaults to 0"><br><br>
 
-    	<button type="submit">Submit</button>
-	</form>
+        <label for="insertOrNot">Insert? (1 = yes, 0 = search):</label>
+        <input type="number" id="insertOrNot" name="insertOrNot" min="0" max="1" value="1"><br><br>
 
-	{% if values %}
-    	<h2>Results:</h2>
-    	<ul>
-    	{% for val in values %}
-        	<li>{{ val }}</li>
-    	{% endfor %}
-    	</ul>
-	{% endif %}
+        <button type="submit">Submit</button>
+    </form>
+
+    {% if values %}
+        <h2>Results:</h2>
+        <ul>
+        {% for val in values %}
+            <li style="white-space: pre-line;">{{ val }}</li>
+        {% endfor %}
+        </ul>
+    {% endif %}
 </body>
 </html>
 '''
 
+def expand_with_synonyms(words):
+    expanded = set(words)
+    for word in words:
+        for syn in wordnet.synsets(word):
+            for lemma in syn.lemmas():
+                expanded.add(lemma.name().replace('_', ' '))
+    return expanded
+
+def compute_frequencies(text):
+    words = re.findall(r'\w+', text.lower())
+    freq = {}
+    for word in words:
+        freq[word] = freq.get(word, 0) + 1
+    return freq
+
+def bm25_score(query_words, doc_freq, doc_len):
+    if doc_len == 0:
+        return 0
+    score = 0
+    for word in query_words:
+        freq = doc_freq.get(word, 0)
+        if freq > 0:
+            numerator = 2 * freq
+            denominator = freq + (2 * (0.25 * (doc_len / 20)))
+            score += numerator / denominator
+    return score
+
 @app.route('/', methods=['GET'])
 def index():
-	return render_template_string(form_html, values=None)
+    return render_template_string(form_html, values=None)
 
 @app.route('/api/value', methods=['GET'])
+@app.route('/api/value', methods=['GET'])
 def get_value():
-	global all_strings
+    global all_flashcards
 
-	# Get user input
-	user_input = request.args.get('user_string', type=str)
-	insert_or_not = request.args.get('insertOrNot', default=1, type=int)
+    user_input = request.args.get('user_string', type=str)
+    insert_or_not = request.args.get('insertOrNot', default=1, type=int)
+    user_id = request.args.get('user_id', default=0, type=int)
 
-	# Initialize results
-	results = []
+    results = []
 
-	if insert_or_not == 1:
-    	# Insert new string if provided
-    	if user_input:
-        	all_strings.append(user_input)
-    	results = all_strings
+    if insert_or_not == 1:
+        if user_input:
+            lines = user_input.split('\n')
+            for line in lines:
+                line = line.strip()
+                if line:  # Avoid empty lines
+                    frequencies = compute_frequencies(line)
+                    card = {
+                        'id': user_id,
+                        'frequencies': frequencies,
+                        'content': line
+                    }
+                    all_flashcards.append(card)
+                    save_flashcards(all_flashcards)
 
-	elif insert_or_not == 0:
-    	if not user_input:
-        	# No input, return all stored strings
-        	results = all_strings
-    	else:
-        	# Search: split input into words and find matching strings
-        	input_words = set(user_input.lower().split())
-        	for s in all_strings:
-            	string_words = set(s.lower().split())
-            	if input_words & string_words:  # Intersection is not empty
-                	results.append(s)
+        results = [
+            f"[ID: {card['id']}, Frequencies: {card['frequencies']}] {card['content']}"
+            for card in all_flashcards
+        ]
 
-	# If the request is from a browser form, return HTML
-	if 'text/html' in request.headers.get('Accept', ''):
-    	return render_template_string(form_html, values=results)
+    elif insert_or_not == 0:
+        if not user_input:
+            results = [
+                f"[ID: {card['id']}, Frequencies: {card['frequencies']}] {card['content']}"
+                for card in all_flashcards
+            ]
+        else:
+            input_words = re.findall(r'\w+', user_input.lower())
+            expanded_query_words = expand_with_synonyms(input_words)
 
-	# Otherwise return JSON
-	return jsonify({'strings': results})
+            scored_cards = []
+            for card in all_flashcards:
+                doc_len = sum(card['frequencies'].values())
+                score = bm25_score(expanded_query_words, card['frequencies'], doc_len)
+                if score > 0:
+                    scored_cards.append((score, card))
+
+            scored_cards.sort(key=lambda x: x[0], reverse=True)  # Sort by score (first element of tuple)
+            results = [
+                f"[ID: {card['id']}, Frequencies: {card['frequencies']}] {card['content']}"
+                for score, card in scored_cards
+            ]
+
+    # If browser
+    if 'text/html' in request.headers.get('Accept', ''):
+        return render_template_string(form_html, values=results)
+
+    # Otherwise JSON
+    return jsonify({'strings': results})
+
 
 if __name__ == '__main__':
-	app.run(debug=True)
-
+    app.run(debug=True)
