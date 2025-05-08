@@ -6,10 +6,14 @@
 
 {% block content %}
 <link rel="stylesheet" href="{% static 'core/signup.css' %}">
-<h2 class="signup-title">Sign up</h2>
-<form method="post" class="signup-form">
-  {% csrf_token %}
-  {{ form }}
-  <button type="submit" class="signup-button">Sign Up</button>
-</form>
+<div class="signup_container">
+  <p class="signup-title">Create Account</p>
+  <form method="post" class="signup-form">
+    {% csrf_token %}
+    {{ form }}
+    <button type="submit" class="signup-button">Create Account</button>
+  </form>
+
+</div>
+
 {% endblock content %}

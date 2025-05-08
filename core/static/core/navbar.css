@@ -45,15 +45,16 @@ a, button {
 }
 .login_bt {
     background-color: #E3EDEA;
-    border-radius: 30px;
-    padding: 2vh 2.5vw ;
-    box-shadow: 0 2px 4px;
+    border-radius: 25px;
+    padding: 1.2vh 2.5vw ;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+
 }
 .logout_bt {
     background-color: #E3EDEA;
     border: none; 
-    border-radius: 30px;
-    padding: 2vh 2.5vw ;
+    border-radius: 25px;
+    padding: 1.2vh 2.5vw ;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     text-decoration: none;
     outline: none;
