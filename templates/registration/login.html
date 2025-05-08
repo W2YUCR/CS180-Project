@@ -1,6 +1,5 @@
 {% extends "base.html" %}
 {% load static %}
-
 {% block content %}
 <link rel="stylesheet" href="{% static 'core/login.css' %}">
 
@@ -16,12 +15,9 @@
                 <div class="login_bar">{{ form.password }}</div>
                 <p>
                     <a class="login_underline" href="{% url 'password_reset' %}">Forgot password?</a>
-                    <a class="login_underline" style="margin-left: .7vw;" href="{% url 'signup' %}"> Sign up?</a>
+                    <a class="login_underline small_margin" href="{% url 'signup' %}"> Sign up?</a>
                 </p>
-
-
         </div>
-
         {% if form.errors %}
             <p class="error_message">Your username and password didn't match. Please try again.</p>
         {% endif %}
