@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block content %}
-<link rel="stylesheet" href="{% static 'core/login.css' %}">
+<link rel="stylesheet" href="{% static 'core/login.css'%}">
 
 
 <div class="login_container">
@@ -14,7 +14,7 @@
                 <div class="login_bar" style="margin-bottom: 4vh;">{{ form.username }}</div>
                 <div class="label">{{ form.password.label_tag }}</div>
                 <div class="login_bar">{{ form.password }}</div>
-                <p ><a class="login_underline" href="{% url 'password_reset' %}">Forgot password?</a><a class="login_underline" style="margin-left: .7vw;" href="{% url 'signup' %}"> Sign up?</a></p>
+                <p><a class="login_underline" href="{% url 'password_reset' %}">Forgot password?</a><a class="login_underline" style="margin-left: .7vw;" href="{% url 'signup' %}"> Sign up?</a></p>
 
 
         </div>
@@ -33,10 +33,7 @@
         {% endif %}
         <input type="submit" value="Login" class="login_page_bt">
         <input type="hidden" name="next" value="{{ next }}">
-
     </form>
-
-
 </div>
 
 {% endblock content %}
