@@ -59,10 +59,17 @@ a, button {
     outline: none;
 }
 
-.navbar-left {
-    display: flex;
-    align-items: center;
-    gap: 2rem;
+@media (min-resolution: 1.5dppx) {
+    .logo {
+        font-size: 2.5rem;   
+    }
+    .nav_options {
+        font-size: 1.4rem;
+    }
+    .login_options {
+        font-size: 1.5rem;
+        margin-right: 40vw;
+    }
 }
 
 /* .title {
