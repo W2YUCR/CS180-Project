@@ -2,6 +2,8 @@ document.addEventListener('DOMContentLoaded', _ => {
     const cardDiv = document.getElementById('card');
     const cardCounter = document.getElementById('card-counter');
     const startBtn = document.getElementById('start-btn');
+    const submitBtn = document.getElementById('submit-btn');
+    const answerInput = document.getElementById('answer');
     const timer = document.getElementById('timer');
     const pk = JSON.parse(document.getElementById('quiz-pk').textContent);
 
@@ -9,15 +11,19 @@ document.addEventListener('DOMContentLoaded', _ => {
 
     function displayCard(question) {
         cardDiv.innerText = question;
+        answerInput.value = '';
+        answerInput.disabled = false;
     }
 
     function displayAnswer(answer) {
         cardDiv.innerText = answer;
     }
 
-    function endReview() {
-        cardDiv.innerText = "Review finished.";
+    function endReview(score) {
+        cardDiv.innerText = `Review finished. Score: ${score}`;
     }
+
+    let timerTimout;
 
     function setTimer(endTime) {
         const now = Date.now();
@@ -29,10 +35,12 @@ document.addEventListener('DOMContentLoaded', _ => {
             return;
         }
         const fractional = delta % 1000;
-        setTimeout(() => setTimer(endTime), fractional);
+        timerTimout = setTimeout(() => setTimer(endTime), fractional);
     }
 
     function clearAndWaitForServer() {
+        clearTimeout(timerTimout);
+        answerInput.disabled = true;
         cardDiv.innerText = "";
     }
 
@@ -53,7 +61,7 @@ document.addEventListener('DOMContentLoaded', _ => {
                     setTimer(data.end_time);
                     break;
                 case 'end':
-                    endReview();
+                    endReview(data.score);
                     break
                 default:
                     break;
@@ -70,4 +78,12 @@ document.addEventListener('DOMContentLoaded', _ => {
     startBtn.addEventListener('click', _ => {
         ws.send(JSON.stringify({ action: 'start' }));
     });
+
+    submitBtn.addEventListener('click', _ => {
+        ws.send(JSON.stringify({
+            action: 'answer',
+            answer: answerInput.value,
+        }));
+        clearAndWaitForServer();
+    })
 });

@@ -1,7 +1,8 @@
+from django.contrib.auth.models import User
 from channels.layers import get_channel_layer
 from dramatiq import actor
 from asgiref.sync import async_to_sync
-from quiz.models import Quiz
+from quiz.models import Quiz, QuizCard, QuizResponse
 import time
 
 
@@ -50,3 +51,18 @@ def quiz_next(pk):
         async_to_sync(channel_layer.group_send)(
             "quiz_{}".format(pk), {"type": "quiz.end"}
         )
+
+
+@actor
+def quiz_submit(pk: int, user_pk: int, answer: str) -> None:
+    channel_layer = get_channel_layer()
+    quiz = Quiz.objects.get(pk=pk)
+    card = QuizCard.objects.get(quiz=quiz, index=quiz.index)
+    QuizResponse.objects.create(user_id=user_pk, card=card, response=answer)
+
+    # Check if all users have submitted
+    if all(
+        QuizResponse.objects.filter(user=user, card=card).exists()
+        for user in quiz.users.all()
+    ):
+        quiz_timeout.send(pk)
