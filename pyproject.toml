@@ -15,6 +15,7 @@ dependencies = [
     "django-dramatiq",
     "django-environ",
     "mysqlclient",
+    "openai",
 ]
 
 [build-system]
