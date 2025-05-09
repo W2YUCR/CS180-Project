@@ -1,65 +1,89 @@
-//CS180-Project/quiz/static/quiz/quiz.js
-
-const csrftoken = Cookies.get('csrftoken');
 document.addEventListener('DOMContentLoaded', _ => {
     const cardDiv = document.getElementById('card');
-    const knownBtn = document.getElementById('known-btn');
-    const unknownBtn = document.getElementById('unknown-btn');
-    const nextBtn = document.getElementById('next-btn');
-    const prevBtn = document.getElementById('prev-btn');
     const cardCounter = document.getElementById('card-counter');
+    const startBtn = document.getElementById('start-btn');
+    const submitBtn = document.getElementById('submit-btn');
+    const answerInput = document.getElementById('answer');
+    const timer = document.getElementById('timer');
+    const pk = JSON.parse(document.getElementById('quiz-pk').textContent);
 
-    const totalCards = parseInt(document.getElementById('card-total').innerText);
+    let ws;
 
-    async function load() {
-        const response = await fetch(`./current`);
-        const data = await response.json();
-
-        if (data['finished']) {
-            cardDiv.textContent = 'Finished reviewing';
-            cardCounter.innerText = totalCards;
-        } else {
-            cardDiv.textContent = data['front'];
-            cardCounter.innerText = data['index'] + 1;
-        }
-
-        prevBtn.disabled = data['index'] === 0;
-        nextBtn.disabled = data['index'] >= totalCards - 1;
+    function displayCard(question) {
+        cardDiv.innerText = question;
+        answerInput.value = '';
+        answerInput.disabled = false;
     }
 
-    knownBtn.addEventListener('click', async _ => {
-        const response = await fetch(`./current`);
-        const data = await response.json();
-        cardDiv.textContent = data['back'];
-    });
+    function displayAnswer(answer) {
+        cardDiv.innerText = answer;
+    }
 
-    unknownBtn.addEventListener('click', async _ => {
-        const response = await fetch(`./current`);
-        const data = await response.json();
-        cardDiv.textContent = data['back'];
-    });
+    function endReview(score) {
+        cardDiv.innerText = `Review finished. Score: ${score}`;
+    }
 
-    nextBtn.addEventListener('click', async _ => {
-        await fetch(`./next`, {
-            method: 'POST',
-            credentials: 'same-origin',
-            headers: {
-                'X-CSRFToken': csrftoken
-            },
+    let timerTimout;
+
+    function setTimer(endTime) {
+        const now = Date.now();
+        const delta = endTime - now;
+        const secs = Math.ceil(delta / 1000);
+        timer.innerText = secs.toString();
+        if (secs <= 0) {
+            clearAndWaitForServer();
+            return;
+        }
+        const fractional = delta % 1000;
+        timerTimout = setTimeout(() => setTimer(endTime), fractional);
+    }
+
+    function clearAndWaitForServer() {
+        clearTimeout(timerTimout);
+        answerInput.disabled = true;
+        cardDiv.innerText = "";
+    }
+
+    window.setTimer = setTimer;
+    function connect() {
+        ws = new WebSocket(`ws://${location.host}/ws/quiz/${pk}/`);
+
+        ws.addEventListener('message', event => {
+            const data = JSON.parse(event.data);
+            switch (data.type) {
+                case 'timeout':
+                    displayAnswer(data.answer);
+                    break;
+
+                case 'show':
+                    startBtn.remove();
+                    displayCard(data.question);
+                    setTimer(data.end_time);
+                    break;
+                case 'end':
+                    endReview(data.score);
+                    break
+                default:
+                    break;
+            }
         });
-        await load();
-    });
 
-    prevBtn.addEventListener('click', async _ => {
-        const response = await fetch(`./prev`, {
-            method: 'POST',
-            credentials: 'same-origin',
-            headers: {
-                'X-CSRFToken': csrftoken
-            },
+        ws.addEventListener('close', _ => {
+            setTimeout(connect, 0);
         });
-        await load();
+    }
+
+    connect();
+
+    startBtn.addEventListener('click', _ => {
+        ws.send(JSON.stringify({ action: 'start' }));
     });
 
-    load();
+    submitBtn.addEventListener('click', _ => {
+        ws.send(JSON.stringify({
+            action: 'answer',
+            answer: answerInput.value,
+        }));
+        clearAndWaitForServer();
+    })
 });

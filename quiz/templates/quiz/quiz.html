@@ -4,20 +4,21 @@
     <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.5/dist/js.cookie.min.js"></script>
     <script src="{% static 'quiz/quiz.js' %}"></script>
 {% endblock scripts %}
+{% block stylesheets %}
+    <link rel="stylesheet" href"{% static 'quiz/quiz.css' %}">
+{% endblock stylesheets %}
 {% block content %}
-    <link rel="stylesheet" href="{% static 'core/quiz.css' %}">
+    {{ pk|json_script:"quiz-pk" }}
     <p>
         Card <span id="card-counter"></span> of <span id="card-total">{{ num_cards }}</span>
     </p>
-    <div class="border_rounded_m-3">
-        <div class="border rounded m-3" id="card"></div>
-    </div>
-    <div class="btn-group" role="group">
-        <button type="button" class="btn btn-primary" id="prev-btn">Prev</button>
-        <button type="button" class="btn btn-primary" id="known-btn">Know</button>
-        <button type="button" class="btn btn-primary" id="unknown-btn">Don't Know</button>
-        <button type="button" class="btn btn-primary" id="next-btn">Next</button>
-    </div>
+    <p>
+        Time remaining: <span id="timer"></span>
+    </p>
+    <button id="start-btn">Start</button>
+    <div class="border rounded m-3" id="card"></div>
+    <input type="text" id="answer">
+    <button id="submit-btn">Submit</button>
     <div class="back-deck-button">
         <a href="{{ deck.get_absolute_url }}">Back to Deck</a>
     </div>
