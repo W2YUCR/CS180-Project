@@ -111,7 +111,7 @@ def expand_with_synonyms(words):
 
 def compute_frequencies(text):
     words = re.findall(r"\w+", text.lower())
-    freq = {}
+    freq: dict[str, int] = {}
     for word in words:
         freq[word] = freq.get(word, 0) + 1
     return freq
