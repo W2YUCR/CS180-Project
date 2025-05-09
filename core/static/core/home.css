@@ -110,6 +110,7 @@
 }
 @media (min-resolution: 1.5dppx) {
     .dna, .question {
-        width: 10vw;
+        width: 7vw;
+        height: 12vh;
     }
 }
