@@ -1,0 +1,102 @@
+/* .error-message {
+    background-color: yellow;
+    color: red;
+    margin-top: 30px;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+ .info-message {
+    color: black;
+    margin-top: 30px;
+    font-family: "Courier New", monospace;
+}
+
+.login-form {
+    margin-top: 30px;
+    color: black;
+    font-family: "Courier New", monospace;
+}
+
+
+
+.login-button {
+    background-color: #BFD0CD;
+    color: black;
+    border: 3px solid black;
+    border-radius: 10px;
+    padding: 10px 20px;
+    margin-top: 10px;
+    font-family: "Courier New", monospace;
+}
+
+.auth-links {
+    color: black;
+    margin-top: 10px;
+    font-family: "Courier New", monospace;
+}  */
+.login_container {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;  
+    margin-top: 10vh;
+}
+
+.login_page_title {
+    color:  black;
+    font-size:2rem;
+    margin-bottom: 5vh;
+}
+.label {
+    color: black;
+    font-size: 1.5rem;
+    margin-bottom: .8vh;
+}
+.login_bar input{
+    width: 26vw;
+    border: none;
+    display: flex;
+    background-color: #CFDCD8;
+    height: 5vh;
+    padding: 10px;
+    color: black;
+    font-size: 1.2rem;
+}
+.login_bar input:focus {
+    outline: none; 
+    box-shadow: none;
+    color: black;
+  }
+.login_page_bt {
+    background-color: #BFD0CD;
+    color: black;
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);  
+    font-size: 1.5rem; 
+    padding: 1vh 3vw;
+    margin-top: 8vh;
+    display: flex;
+    margin-left: auto;
+    margin-right: auto;
+}
+.login_page_bt:hover {
+    background-color: #B8C3BD;
+
+}
+.login_underline {
+    color: black;
+}
+.login_underline:hover {
+    text-decoration: underline;
+}
+.error_message, .info_message {
+    color: red;
+}
+.small_margin_left {
+    margin-left: .7vw;
+}
+.small_margin_bot {
+    margin-bottom: 4vh;
+}

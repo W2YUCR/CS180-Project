@@ -1,0 +1,58 @@
+services:
+  web:
+    build: .
+    restart: always
+    command: ./setup.sh
+    ports:
+      - 8000:8000
+    env_file:
+      - .env
+    depends_on:
+      db:
+        condition: service_healthy
+    develop:
+      watch:
+        - path: .
+          target: .
+          action: sync
+  dramatiq:
+    build: .
+    restart: always
+    command: ./dramatiq.sh
+    env_file:
+      - .env
+    depends_on:
+      redis:
+        condition: service_healthy
+    develop:
+      watch:
+        - path: .
+          target: .
+          action: sync
+  redis:
+    image: redis
+    restart: always
+    ports:
+      - 6379:6379
+    healthcheck:
+      test: [ "CMD", "redis-cli", "--raw", "incr", "ping" ]
+  db:
+    image: mariadb
+    restart: always
+    volumes:
+      - data:/var/lib/mysql
+    environment:
+      MARIADB_RANDOM_ROOT_PASSWORD: "true"
+      MARIADB_DATABASE: ${DB_DATABASE}
+      MARIADB_USER: ${DB_USER}
+      MARIADB_PASSWORD: ${DB_PASSWORD}
+    ports:
+      - 3306:3306
+    healthcheck:
+      test: [ "CMD", "healthcheck.sh", "--connect", "--innodb_initialized" ]
+      start_period: 10s
+      interval: 10s
+      timeout: 5s
+      retries: 3
+volumes:
+  data:
