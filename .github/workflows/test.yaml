@@ -2,6 +2,8 @@ name: Lint and Test
 
 on: [push]
 
+env:
+  DATABASE_URL: "sqlite:////db.sqlite3"
 jobs:
   build:
     runs-on: ubuntu-latest
