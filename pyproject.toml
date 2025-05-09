@@ -3,6 +3,9 @@ name = "triviatrek"
 version = "0.0.1"
 dependencies = [
     "Django",
+    "flask",
+    "nltk",
+    "praw",
     "mypy",
     "django-stubs",
     "djlint",
