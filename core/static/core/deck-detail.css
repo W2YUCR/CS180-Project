@@ -1,14 +1,26 @@
-.deck-info{
-    background-color: #007bff;
-    color: white;
+.deck-info {
+    background-color: #a3aca7;
+    color: black;
+    border: 5px solid black;
     padding: 10px;
     margin-bottom: 20px;
+    margin-top: 30px;
     font-family: "Courier New";
 }
 
 .create-navigation a {
-    background-color: #007bff;
-    color: white;
+    background-color: #E3EDEA;
+    color: black;
+    border: 3px solid black;
+    padding: 15px;
+    margin: 5px;
+    font-family: "Courier New";
+    text-decoration: none;
+}
+
+input {
+    background-color: #B8C3BD;
+    color: black;
     border: 3px solid black;
     border-radius: 20px;
     padding: 15px;
@@ -17,18 +29,7 @@
     text-decoration: none;
 }
 
-input  {
-    background-color: #0011ff;
-    color: white;
-    border: 3px solid black;
-    border-radius: 20px;
-    padding: 15px;
-    margin: 5px;
-    font-family: "Courier New";
-    text-decoration: none;
-}
-
-.create-navigation{
+.create-navigation {
     margin-top: 30px;
     margin-bottom: 20px;
 }

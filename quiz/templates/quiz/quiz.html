@@ -10,7 +10,7 @@
 {% block content %}
     {{ pk|json_script:"quiz-pk" }}
     <p>
-        Card <span id="card-counter"></span> of <span>{{ num_cards }}</span>
+        Card <span id="card-counter"></span> of <span id="card-total">{{ num_cards }}</span>
     </p>
     <p>
         Time remaining: <span id="timer"></span>
@@ -18,6 +18,6 @@
     <button id="start-btn">Start</button>
     <div class="border rounded m-3" id="card"></div>
     <div class="back-deck-button">
-        <a>Back to Deck</a>
+        <a href="{{ deck.get_absolute_url }}">Back to Deck</a>
     </div>
 {% endblock content %}

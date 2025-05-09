@@ -1,6 +1,8 @@
 {% extends "base.html" %}
 {% block content %}
-
+{% load static %} 
+<link rel="stylesheet" href="{% static 'core/home.css' %}">
+<div class="home">
 {% if user.is_authenticated %}
     <div class="introduction">
         <p>Welcome back to TriviaTrek!<br></p>
@@ -17,5 +19,20 @@
         <p>If you do have an account, click the "Login" button.<br></p>
     </div>
 {% endif %}
-
+<div class="home_card_set">
+    <div class="home_card">
+        <p class="home_card_text">Flashcards</p>
+        <div class="home_flashcard"></div>
+        <p class="dna_text">DNA</p>
+        <img src="{% static 'image/dna.webp' %}" class="dna" width="200" height="150" alt="DNA molecule illustration">
+    </div>
+    <div class="home_card">
+        <p class="home_card_text">Quiz</p>
+        <div class="question_card"></div>
+        <img src="{% static 'image/question.webp' %}" class="question" width="200" height="150" alt="Question mark graphic">
+        <p class="true">True</p>
+        <p class="false">False</p>
+    </div>
+</div>
+</div>
 {% endblock content %}

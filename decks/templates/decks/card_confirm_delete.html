@@ -2,7 +2,7 @@
 {% load static %}
 {% block content %}
   <link rel="stylesheet" href="{% static 'core/card_confirm_delete.css' %}">
-    <form method="post" class="delete-question">
+    <form method="post" class="delete-question" >
         {% csrf_token %}
         <p>Are you sure you want to delete this card?</p>
         {% include "decks/_card_preview.html" %}
