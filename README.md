@@ -34,11 +34,13 @@ You should now be running a development server at `http://127.0.0.1:8000/`
 Create a `.env` file in the root of the project with these contents
 
 ```env
-DJANGO_SETTINGS_MODULE='flashcards.settings_prod'
+SECRET_KEY=<secret key>
+DJANGO_SETTINGS_MODULE='flashcards.settings_dev'
 REDIS_URL='redis://redis:6379'
-DB_DATABASE=<some database name>
-DB_USER=<some username>
-DB_PASSWORD=<some password>
+DB_DATABASE=<database>
+DB_USER=<username>
+DB_PASSWORD=<password>
+DATABASE_URL="mysql://<username>:<password>@db:3306/<database>"
 ```
 
 Run Docker Compose

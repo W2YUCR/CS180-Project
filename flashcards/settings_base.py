@@ -21,15 +21,8 @@ env = environ.Env(
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-$dx4=ag5p6y(k7rrgi8(v_z3ok1@k7&c)3un_l9ppcwu4^se+$'
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
 
 from pathlib import Path
 from typing import List
@@ -80,6 +73,11 @@ TEMPLATES = [
         },
     },
 ]
+
+
+DATABASES = {
+    'default': env.db_url()
+}
 
 ASGI_APPLICATION = 'flashcards.asgi.application'
 
