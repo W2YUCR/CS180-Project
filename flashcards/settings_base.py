@@ -17,6 +17,7 @@ env = environ.Env(
     # set casting, default value
     REDIS_URL=(str, "redis://localhost:6379")
 )
+env.read_env(env.str('ENV_PATH', '.env'))
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
