@@ -1,4 +1,4 @@
-.btn-primary {
+.btn-btn-primary {
     background-color: green;
     color: white;
     border: 3px solid black;
@@ -9,7 +9,7 @@
     text-decoration: none;
 }
 
-.btn-danger {
+.btn-btn-danger {
     background-color: rgb(177, 0, 0);
     color: white;
     border: 3px solid black;
