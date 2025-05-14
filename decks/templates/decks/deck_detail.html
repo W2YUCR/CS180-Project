@@ -4,6 +4,18 @@
 {% load static %}
 {% block content %}
 <link rel="stylesheet" href="{% static 'core/deck-detail.css' %}">
+<div class="instructions-title">
+    <p>Instructions<br></p>
+</div>
+<div class="instructions-list">
+    <p>1. This is the page of your specific flashcard set.<br></p>
+    <p>2. If you need to edit a specific flashcard, click on that flashcard and follow the next instructions.<br></p>
+    <p>3. If you want to review the flashcard set, click the "Review" button.<br></p>
+    <p>4. If you want to shuffle the flashcards in the flashcard set, click the "Shuffle Cards" button.<br></p>
+    <p>5. If you want to edit the title or description of this flashcard set, click the "Edit" button.<br></p>
+    <p>6. If you want to delete this flashcard set, click the "Delete" button.<br></p>
+    <p>6. If you want to add a new flashcard to this flashcard set, click the "New Card" button.<br></p>
+</div>
 <div class="deck-info">
     <h1>{{ deck.name }}</h1>
     <p>{{ deck.description }}</p>
@@ -17,7 +29,7 @@
     <a href="?shuffle=true">Shuffle Cards</a>
     <a href="{% url 'deck-update' pk=deck.pk %}">Edit</a>
     <a href="{% url 'deck-delete' pk=deck.pk %}">Delete</a>
-    <a href="{% url 'card-create' deck_pk=deck.pk %}">New card</a>
+    <a href="{% url 'card-create' deck_pk=deck.pk %}">New Card</a>
 </div>
 
 <div class="d-grid gap-3">
