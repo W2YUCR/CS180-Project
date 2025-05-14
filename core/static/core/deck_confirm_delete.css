@@ -1,10 +1,10 @@
-.btn-cancel {
+.btn btn-primary btn-cancel {
     color: black;
     background-color: #c8d2cf;
     border: 2px solid black;
 }
 
-.btn-confirm {
+.btn btn-danger btn-confirm {
     color: black;
     background-color: #BFD0CD;
     border: 2px solid black;
