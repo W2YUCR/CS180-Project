@@ -46,3 +46,25 @@ a:hover {
     text-decoration: underline;
     color: #0033cc;
 }
+
+.instructions-list {
+  margin-top: 00px;
+  margin-bottom: 30px;
+  padding: 20px;
+  font-size: 18px;
+  text-align: left;
+  font-family: "Courier New";
+  background-color: #B8C3BD;
+  color: #000000;
+}
+
+.instructions-title {
+  margin-top: 30px;
+  margin-bottom: 0px;
+  padding: 20px;
+  font-size: 25px;
+  text-align: center;
+  font-family: "Courier New";
+  background-color: #B8C3BD;
+  color: #000000;
+}
