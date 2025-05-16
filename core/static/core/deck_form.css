@@ -14,30 +14,6 @@
     font-family: "Courier New";
 }
 
-.instructions-list {
-  margin-top: 00px;
-  margin-bottom: 10px;
-  padding: 20px;
-  font-size: 18px;
-  text-align: left;
-  font-family: "Courier New";
-  background-color: #B8C3BD;
-  color: #000000;
-}
-
-.instructions-title {
-  margin-top: 30px;
-  margin-bottom: 0px;
-  padding: 20px;
-  font-size: 25px;
-  text-align: center;
-  font-family: "Courier New";
-  background-color: #B8C3BD;
-  color: #000000;
-}
-=======
-}
-
 .deck_form_container {
     display: flex;
   flex-direction: column;
