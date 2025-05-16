@@ -23,7 +23,13 @@ class ReviewWebSocketConsumer(AsyncJsonWebsocketConsumer):
         match content:
             case {"action": "ready"}:
                 await self.send_next()
+            case {"action": "flip"}:
+                if self.card is None:
+                    return
+                await self.send_json({"type": "show", "card": self.card.back})
             case {"action": "rate", "rating": rating}:
+                if self.card is None:
+                    return
                 if rating == "good":
                     await sync_to_async(self.card.review)(Rating.Good)
                 else:
@@ -33,17 +39,13 @@ class ReviewWebSocketConsumer(AsyncJsonWebsocketConsumer):
     async def send_next(self):
         await sync_to_async(self.get_random_card)()
         if self.card is not None:
-            await self.send_json({"action": "next", "card": self.card.front})
+            await self.send_json({"type": "show", "card": self.card.front})
         else:
-            await self.send_json({"action": "end"})
+            await self.send_json({"type": "end"})
 
     def get_random_card(self):
         # Note: Not exactly very efficient
-        cards = list(
-            Card.objects.filter(
-                deck=self.deck, due__lte=timezone.now()
-            ).all()
-        )
+        cards = list(Card.objects.filter(deck=self.deck, due__lte=timezone.now()).all())
 
         if len(cards) != 0:
             self.card = random.choice(cards)
