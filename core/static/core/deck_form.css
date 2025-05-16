@@ -1,4 +1,4 @@
-.deck-form {
+/* .deck-form {
     margin-top: 100px;
     color: black;
 }
@@ -12,4 +12,41 @@
     padding: 15px;
     margin: 10px;
     font-family: "Courier New";
+} */
+
+.deck_form_container {
+    display: flex;
+  flex-direction: column;
+  align-items: center; 
+  justify-content: center;
+  margin-top: 10vh;
+}
+.deck-form input {
+    width: 26vw;
+    border: none;
+    display: flex;
+    background-color: #CFDCD8;
+    height: 5vh;
+    padding: 10px;
+    color: black;
+    font-size: 1.2rem;
+}
+.deck-form textarea{
+    width: 26vw;
+    border: none;
+    display: flex;
+    background-color: #CFDCD8;
+    height: 30vh;
+    padding: 10px;
+    color: black;
+    font-size: 1.2rem;
+    resize: none;
+}
+.deck-form label {
+    font-size: 1.3rem;
+}
+.deck-form  input:focus {
+    outline: none; 
+    box-shadow: none;
+    color: black;
 }
