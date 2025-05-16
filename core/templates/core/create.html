@@ -5,22 +5,23 @@
 <link rel="stylesheet" href="{% static 'core/create.css' %}">
 
 {% if user.is_authenticated %}
-    <div class="create-instructions">
-        <p>This is where you create a set of flashcards.<br></p>
-        <p>Instructions<br></p>
+<div class="create_container">
+    <div class="create_instructions">
+        <p>This is where you create a set of flashcards.</p>
     </div>
     <div class="instructions-list">
-        <p>1. Click the "Create Deck" button below.<br></p>
-        <p>2. Enter the name (required) of your new set of flashcards and description (optional).<br></p>
-        <p>3. Click the "Save" button.<br></p>
-        <p>4. Once you have your flashcard set, click "Edit" to edit existing flashcards, click "Delete" to delete the current flashcard set, or click "Add Card" to add a card to the current flashcard set.<br></p>
-        <p>5. When you click the "Add Card" button, input the text for the front and back (both required) and click the "Save" button to save the card to the deck and then click "Back to Deck" to view all cards in your deck.<br></p>
-        <p>6. In your deck, you can click the card to edit or delete that card.<br></p>
-        <p>7. Once done, click the "Back to Flashcard Sets" buttons to go back to your flashcard sets.<br></p>
+        <p>1. Click the "Create Deck" button below.</p>
+        <p>2. Enter the name (required) of your new set of flashcards and description (optional).</p>
+        <p>3. Click the "Save" button.</p>
+        <p>4. Once you have your flashcard set, click "Edit" to edit existing flashcards, click "Delete" to delete the current flashcard set, or click "Add Card" to add a card to the current flashcard set.</p>
+        <p>5. When you click the "Add Card" button, input the text for the front and back (both required) and click the "Save" button to save the card to the deck and then click "Back to Deck" to view all cards in your deck.</p>
+        <p>6. In your deck, you can click the card to edit or delete that card.</p>
+        <p>7. Once done, click the "Back to Flashcard Sets" buttons to go back to your flashcard sets.</p>
     </div>
     <div class="create-deck-button">
       <a href="{% url 'deck-create' %}">Create Deck</a>
     </div>
+</div>
 {% endif %}
 
 {% endblock content %}

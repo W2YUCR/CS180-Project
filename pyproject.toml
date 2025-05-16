@@ -1,7 +1,22 @@
 [project]
 name = "triviatrek"
 version = "0.0.1"
-dependencies = ["Django", "mypy", "django-stubs", "djlint"]
+dependencies = [
+    "Django",
+    "flask",
+    "nltk",
+    "praw",
+    "mypy",
+    "django-stubs",
+    "djlint",
+    "channels[daphne]",
+    "channels_redis",
+    "dramatiq[redis, watch]",
+    "django-dramatiq",
+    "django-environ",
+    "mysqlclient",
+    "openai",
+]
 
 [build-system]
 requires = ["setuptools"]
@@ -14,6 +29,7 @@ packages = ["flashcards", "core", "accounts", "decks", "quiz"]
 plugins = ["mypy_django_plugin.main"]
 explicit_package_bases = true
 check_untyped_defs = true
+follow_untyped_imports = true
 enable_error_code = "explicit-override"
 exclude = "^build/"
 

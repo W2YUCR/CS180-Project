@@ -1,40 +1,36 @@
 {% extends "base.html" %}
 {% load static %}
-
 {% block content %}
 <link rel="stylesheet" href="{% static 'core/login.css' %}">
+<div class="login_container">
+    <p class="login_page_title">Login</p>
+    <form method="post" action="{% url 'login' %}">
+        {% csrf_token %}
+        <div>
+                <div class="label">{{ form.username.label_tag }}</div>
+                <div class="login_bar small_margin_bot">{{ form.username }}</div>
+                <div class="label">{{ form.password.label_tag }}</div>
+                <div class="login_bar">{{ form.password }}</div>
+                <p>
+                    <a class="login_underline" href="{% url 'password_reset' %}">Forgot password?</a>
+                    <a class="login_underline small_margin_left" href="{% url 'signup' %}"> Sign up?</a>
+                </p>
+        </div>
+        {% if form.errors %}
+            <p class="error_message">Your username and password didn't match. Please try again.</p>
+        {% endif %}
 
-{% if form.errors %}
-    <p class="error-message">Your username and password didn't match. Please try again.</p>
-{% endif %}
-
-{% if next %}
-    {% if user.is_authenticated %}
-        <p class="info-message">Your account doesn't have access to this page. To proceed,
-        please login with an account that has access.</p>
-    {% else %}
-        <p class="info-message">Please login to see this page.</p>
-    {% endif %}
-{% endif %}
-
-<form method="post" action="{% url 'login' %}" class="login-form">
-    {% csrf_token %}
-    <table>
-        <tr>
-            <td class="label">{{ form.username.label_tag }}</td>
-            <td>{{ form.username }}</td>
-        </tr>
-        <tr>
-            <td class="label">{{ form.password.label_tag }}</td>
-            <td>{{ form.password }}</td>
-        </tr>
-    </table>
-
-    <input type="submit" value="Login" class="login-button">
-    <input type="hidden" name="next" value="{{ next }}">
-</form>
-
-<p class="auth-links">No account? <a href="{% url 'signup' %}">Sign up</a></p>
-<p class="auth-links"><a href="{% url 'password_reset' %}">Lost password?</a></p>
+        {% if next %}
+            {% if user.is_authenticated %}
+                <p class="info_message">Your account doesn't have access to this page. To proceed,
+                please login with an account that has access.</p>
+            {% else %}
+                <p class="info_message">Please login to see this page.</p>
+            {% endif %}
+        {% endif %}
+        <input type="submit" value="Login" class="login_page_bt">
+        <input type="hidden" name="next" value="{{ next }}">
+    </form>
+</div>
 
 {% endblock content %}
