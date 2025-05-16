@@ -6,8 +6,9 @@
         <h1>{{ deck.name }}</h1>
         <p>{{ deck.description }}</p>
     </div>
-    <a href="{% url 'quiz-create' deck_pk=deck.pk %}">Review</a>
     <div class="create-navigation">
+        <a href="{% url 'quiz-create' deck_pk=deck.pk %}">Quiz</a>
+        <a href="{% url 'review' deck_pk=deck.pk %}">Review</a>
         <a href="{% url 'deck-update' pk=deck.pk %}">Edit</a>
         <a href="{% url 'deck-delete' pk=deck.pk %}">Delete</a>
         <a href="{% url 'card-create' deck_pk=deck.pk %}">New card</a>

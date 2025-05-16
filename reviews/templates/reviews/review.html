@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% load static %}
+{% block scripts %}
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.5/dist/js.cookie.min.js"></script>
+    <script src="{% static "reviews/reviews.js" %}"></script>
+{% endblock scripts %}
+{% block content %}
+    {{ deck_pk|json_script:"deck-pk" }}
+    <div class="border rounded m-3" id="card"></div>
+    <input type="text" id="answer">
+    <button id="submit-btn">Submit</button>
+{% endblock content %}
