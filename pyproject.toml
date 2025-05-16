@@ -16,7 +16,7 @@ dependencies = [
     "django-environ",
     "mysqlclient",
     "openai",
-    "fsrs-rs-python",
+    "fsrs",
 ]
 
 [build-system]

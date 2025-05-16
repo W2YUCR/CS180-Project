@@ -16,6 +16,7 @@
     <div class="d-grid gap-3">
         {% for card in cards %}
             <div class="border_rounded_position-relative">
+                <p>Scheduled: {{ card.due }}</p>
                 <a href="{{ card.get_absolute_url }}" class="card-link">
                     <div class="m-3">{{ card.front }}</div>
                     <hr>
