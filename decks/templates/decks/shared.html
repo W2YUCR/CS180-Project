@@ -2,6 +2,15 @@
 {% load static %}
 {% block content %}
     <link rel="stylesheet" href="{% static 'core/shared.css' %}">
+    <link rel="stylesheet" href="{% static 'core/instructions.css' %}">
+    <div class="instructions-title">
+        <p>Instructions<br></p>
+    </div>
+    <div class="instructions-list">
+        <p>1. This is the page the you can search or view published flashcard sets.<br></p>
+        <p>2. You search for the flashcard set by inputting the search bar and then click the "Search" button.<br></p>
+        <p>3. For the given flashcard set, click the "View" button to see the contents of that flashcard set..<br></p>
+    </div>
     <form class="d-flex" role="search">
         <input class="form-control me-2"
                name="search"

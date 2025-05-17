@@ -2,6 +2,14 @@
 {% load static %}
 {% block content %}
   <link rel="stylesheet" href="{% static 'core/deck-list.css' %}">
+  <link rel="stylesheet" href="{% static 'core/instructions.css' %}">
+  <div class="instructions-title">
+      <p>Instructions<br></p>
+  </div>
+  <div class="instructions-list">
+    <p>1. This is the page where all of your flashcard sets are stored.<br></p>
+    <p>2. You can access a specific flashcard set by clicking the name below.</p>
+  </div>
   <table class="deck_list_container">
     <thead>
       <tr>
