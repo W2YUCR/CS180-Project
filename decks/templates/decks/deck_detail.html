@@ -3,22 +3,22 @@
 {% block content %}
     <link rel="stylesheet" href="{% static 'core/deck-detail.css' %}">
     <div class="deck-info">
-        <h1>{{ deck.name }}</h1>
-        <p>{{ deck.description }}</p>
+        <p class="deck-name">{{ deck.name }}</p>
+        <p class="deck-description">{{ deck.description }}</p>
     </div>
-    <a href="{% url 'quiz-create' deck_pk=deck.pk %}">Review</a>
-    <div class="create-navigation">
-        <a href="{% url 'deck-update' pk=deck.pk %}">Edit</a>
-        <a href="{% url 'deck-delete' pk=deck.pk %}">Delete</a>
-        <a href="{% url 'card-create' deck_pk=deck.pk %}">New card</a>
+    <div class="deck-options-container">
+        <a href="{% url 'quiz-create' deck_pk=deck.pk %}" class="deck-option deck-review">Review</a>
+            <a href="{% url 'card-create' deck_pk=deck.pk %}" class="deck-option">Add</a>
+            <a href="{% url 'deck-update' pk=deck.pk %}" class="deck-option">Edit</a>
+            <a href="{% url 'deck-delete' pk=deck.pk %}" class="deck-option">Delete</a>
     </div>
-    <div class="d-grid gap-3">
+    <div class="card-list">
         {% for card in cards %}
-            <div class="border_rounded_position-relative">
+            <div class="card-border">
                 <a href="{{ card.get_absolute_url }}" class="card-link">
-                    <div class="m-3">{{ card.front }}</div>
-                    <hr>
-                    <div class="m-3">{{ card.back }}</div>
+                    <div class="card-front">{{ card.front }}</div>
+                    <div class="card-divider"></div>
+                    <div class="card-back">{{ card.back }}</div>
                 </a>
             </div>
         {% endfor %}

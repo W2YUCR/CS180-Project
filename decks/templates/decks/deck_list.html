@@ -2,20 +2,36 @@
 {% load static %}
 {% block content %}
   <link rel="stylesheet" href="{% static 'core/deck-list.css' %}">
-  <table>
+  <table class = "deck_list_container">
     <thead>
       <tr>
-        <th>Flashcard Sets</th>
+        <th class="deck_list_title">Your flashcards</th>
       </tr>
     </thead>
+  {% if deck_list %}
     <tbody>
       {% for deck in deck_list %}
         <tr>
           <td>
-            <a href="{{ deck.id }}">{{ deck.name }}</a>
+            <a href="{{ deck.id }}">
+            <div class="deck">
+              <p  class="deck_name">{{ deck.name }}</p>
+              <p  class="deck_description">{{ deck.description }}</p>
+            </div>
+            </a>  
           </td>
         </tr>
       {% endfor %}
     </tbody>
+  {% else %}
+      <tbody>
+        <tr>
+          <td>
+              <p class="deck_empty">Empty!</p>
+              <a href="{% url 'create' %}" class="deck_create">Create?</a>
+          </td>
+        </tr>
+      </tbody>
+    {% endif %}
   </table>
 {% endblock content %}
