@@ -1,63 +1,91 @@
 .deck-info {
-    background-color: #a3aca7;
+    background-color: #21B78F;
+    box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.3);
+    max-width: 90%;
+    position: relative;
+    margin: 0 auto;
+    margin-top: 5vh;
+    padding-bottom: 2rem;
+ }
+ .deck-name {
+    color: white; 
+    margin-left: 1vw;
+    padding-top: 2vh;
+    font-size: 2.5rem;
+ }
+ .deck-description {
+    color: white; 
+    margin-left: 3vw;
+    margin-top: 1vh;
+    font-size: 1.5rem;
+    white-space: normal;
+    overflow-wrap: break-word; 
+    word-break: break-word;    
+    max-width: 90%; 
+ }
+ .deck-options-container {
+    display: flex;
+    justify-content: center;
+    gap: 5rem
+ }
+ .deck-option {
+    background-color: #BFD0CD;
     color: black;
-    border: 5px solid black;
-    padding: 10px;
-    margin-bottom: 20px;
-    margin-top: 30px;
-    font-family: "Courier New";
-}
-
-.create-navigation a {
-    background-color: #E3EDEA;
-    color: black;
-    border: 3px solid black;
-    padding: 15px;
-    margin: 5px;
-    font-family: "Courier New";
-    text-decoration: none;
-}
-
-input {
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);  
+    font-size: 1.5rem; 
+    padding: 1vh 3vw;
+    margin-top: 5vh;
+    width: 10vw;
+    text-align: center;
+ }
+ .deck-option:hover {
     background-color: #B8C3BD;
-    color: black;
-    border: 3px solid black;
-    border-radius: 20px;
-    padding: 15px;
-    margin: 5px;
-    font-family: "Courier New";
-    text-decoration: none;
-}
+ }
+ .deck-review {
+    margin-right: 30vw;
+ }
+ .card-list {
+  display: flex;
+  flex-direction: column;
+  background-color: #BFD0CD;
+  max-width: 40%;
+  margin: 7vh auto 0 auto;
+ }
+.card-border {
+  background-color: #E3EDEA;
+  width: 90%;
+  margin: 2vh auto 2vh auto; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    padding-bottom: 10%;  
+    transition: transform 0.3s ease-in-out 0s;
 
-.create-navigation {
-    margin-top: 30px;
-    margin-bottom: 20px;
-}
 
-.border_rounded_position-relative {
-    margin-top: 5px;
-    margin-bottom: 5px;
-    background-color: white;
-    color: black;
-    border: 3px solid black;
-    border-radius: 20px;
-    font-family: "Courier New";
 }
+.card-border:hover, .card-divider:hover {
+    transform: scale(1.1);
 
-.card-link {
-    display: block;
-    color: inherit;
-    text-decoration: none;
 }
-
-.visually-hidden {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    white-space: nowrap;
-    border: 0;
+.card-front {
+    font-size: 2rem;
+    margin-left: 1vw;
+    margin-top: 1vh;
+}
+.card-divider {
+  width: 94%;
+  margin-left: 1vw;
+  background-color: black;
+  height: 0.2vh;
+  transition: transform 0.3s ease-in-out 0s;
+}
+.card-back {
+    margin-top: 1vh;
+    font-size: 1.5rem;
+    margin-left: 1vw;
+    margin-bottom: 2vh;
+    white-space: normal;
+    overflow-wrap: break-word; 
+    word-break: break-word;  
+    max-width: 94%;
 }

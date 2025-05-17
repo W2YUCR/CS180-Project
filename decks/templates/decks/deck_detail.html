@@ -16,30 +16,24 @@
         <p>6. If you want to add a new flashcard to this flashcard set, click the "New Card" button.</p>
     </div>
     <div class="deck-info">
-        <h1>{{ deck.name }}</h1>
-        <p>{{ deck.description }}</p>
+        <p class="deck-name">{{ deck.name }}</p>
+        <p class="deck-description">{{ deck.description }}</p>
     </div>
-    <form action="{% url 'quiz-create' deck_pk=deck.pk %}" method="post">
-        {% csrf_token %}
-        <input type="hidden" name="deck_pk" value="{{ deck.pk }}">
-        <input type="submit" value="Review" class="review-button">
-    </form>
-    <div class="create-navigation">
-        <a href="?shuffle=true">Shuffle Cards</a>
-        <a href="{% url 'deck-update' pk=deck.pk %}">Edit</a>
-        <a href="{% url 'deck-delete' pk=deck.pk %}">Delete</a>
-        <a href="{% url 'card-create' deck_pk=deck.pk %}">New Card</a>
+    <div class="deck-options-container">
+        <a href="{% url 'quiz-create' deck_pk=deck.pk %}" class="deck-option deck-review">Review</a>
+            <a href="{% url 'card-create' deck_pk=deck.pk %}" class="deck-option">Add</a>
+            <a href="{% url 'deck-update' pk=deck.pk %}" class="deck-option">Edit</a>
+            <a href="{% url 'deck-delete' pk=deck.pk %}" class="deck-option">Delete</a>
     </div>
-
-    <div class="d-grid gap-3">
+    <div class="card-list">
         {% for card in cards %}
-        <div class="border_rounded_position-relative">
-            <a href="{{ card.get_absolute_url }}" class="card-link">
-                <div class="m-3">{{ card.front }}</div>
-                <hr>
-                <div class="m-3">{{ card.back }}</div>
-            </a>
-        </div>
+            <div class="card-border">
+                <a href="{{ card.get_absolute_url }}" class="card-link">
+                    <div class="card-front">{{ card.front }}</div>
+                    <div class="card-divider"></div>
+                    <div class="card-back">{{ card.back }}</div>
+                </a>
+            </div>
         {% endfor %}
     </div>
 {% endblock content %}
