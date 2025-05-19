@@ -3,15 +3,12 @@ document.addEventListener('DOMContentLoaded', _ => {
     const flipBtn = document.getElementById('flip-btn');
     const goodBtn = document.getElementById('good-btn');
     const againBtn = document.getElementById('again-btn');
-    const answerInput = document.getElementById('answer');
     const pk = JSON.parse(document.getElementById('deck-pk').textContent);
 
     let ws;
 
     function displayCard(question) {
         cardDiv.innerText = question;
-        answerInput.value = '';
-        answerInput.disabled = false;
     }
 
     function endReview() {

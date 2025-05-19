@@ -7,7 +7,6 @@
 {% block content %}
     {{ deck_pk|json_script:"deck-pk" }}
     <div class="border rounded m-3" id="card"></div>
-    <input type="text" id="answer">
     <button id="flip-btn">Flip</button>
     <button id="good-btn">Good</button>
     <button id="again-btn">Again</button>
