@@ -1,13 +1,23 @@
-.btn-cancel {
-    color: black;
-    background-color: #c8d2cf;
-    border: 2px solid black;
+.btn-btn-primary-btn-cancel {
+    background-color: green;
+    color: white;
+    border: 3px solid black;
+    border-radius: 20px;
+    padding: 15px;
+    margin: 5px;
+    font-family: "Courier New";
+    text-decoration: none;
 }
 
-.btn-confirm {
-    color: black;
-    background-color: #BFD0CD;
-    border: 2px solid black;
+.btn-btn-danger-btn-confirm {
+    background-color: rgb(177, 0, 0);
+    color: white;
+    border: 3px solid black;
+    border-radius: 20px;
+    padding: 15px;
+    margin: 5px;
+    font-family: "Courier New";
+    text-decoration: none;
 }
 
 .delete-deck-form {

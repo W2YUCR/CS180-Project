@@ -1,4 +1,4 @@
-/* .deck-form {
+.deck-form {
     margin-top: 100px;
     color: black;
 }
@@ -12,7 +12,7 @@
     padding: 15px;
     margin: 10px;
     font-family: "Courier New";
-} */
+}
 
 .deck_form_container {
     display: flex;
@@ -21,6 +21,7 @@
   justify-content: center;
   margin-top: 10vh; 
 }
+
 .deck-form input {
     width: 26vw;
     border: none;
@@ -33,6 +34,7 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);  
     
 }
+
 .deck-form textarea{
     width: 26vw;
     border: none;
@@ -48,14 +50,17 @@
 
     
 }
+
 .deck-form label {
     font-size: 1.3rem;
 }
+
 .deck-form  input:focus {
     outline: none; 
     box-shadow: none;
     color: black;
 }
+
 .save_button {
     background-color: #BFD0CD;
     border: none;
