@@ -20,14 +20,16 @@
         <p class="deck-description">{{ deck.description }}</p>
     </div>
     <div class="deck-options-container">
-        <a href="{% url 'quiz-create' deck_pk=deck.pk %}" class="deck-option deck-review">Review</a>
-            <a href="{% url 'card-create' deck_pk=deck.pk %}" class="deck-option">Add</a>
-            <a href="{% url 'deck-update' pk=deck.pk %}" class="deck-option">Edit</a>
-            <a href="{% url 'deck-delete' pk=deck.pk %}" class="deck-option">Delete</a>
+        <a href="{% url 'quiz-create' deck_pk=deck.pk %}" class="deck-option">Quiz</a>
+        <a href="{% url 'review' deck_pk=deck.pk %}" class="deck-option">Review</a>
+        <a href="{% url 'card-create' deck_pk=deck.pk %}" class="deck-option">Add</a>
+        <a href="{% url 'deck-update' pk=deck.pk %}" class="deck-option">Edit</a>
+        <a href="{% url 'deck-delete' pk=deck.pk %}" class="deck-option">Delete</a>
     </div>
     <div class="card-list">
         {% for card in cards %}
             <div class="card-border">
+                <p>Scheduled: {{ card.due }}</p>
                 <a href="{{ card.get_absolute_url }}" class="card-link">
                     <div class="card-front">{{ card.front }}</div>
                     <div class="card-divider"></div>
