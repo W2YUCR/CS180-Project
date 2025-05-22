@@ -21,7 +21,7 @@
         <input type="text" id="answer">
         <button id="submit-btn">Submit</button>
         <div class="back-deck-button">
-            <a href="/decks/{{ deck.pk }}/">Back to Deck</a>
+            <a href="{% url 'deck-detail' deck.pk %}">Back to Deck</a>
         </div>
         <div class="back-quiz-list-button">
             <a href="{% url 'quiz-list' %}" >Back to Quiz List</a>
