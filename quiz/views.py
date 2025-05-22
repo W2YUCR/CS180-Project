@@ -79,8 +79,12 @@ class QuizListView(ListView):
     template_name = "quiz/quiz_list.html"
     context_object_name = "quiz_list"
 
+    @override
     def get_queryset(self):
-        return Quiz.objects.filter(users=self.request.user)
+        if self.request.user.is_authenticated:
+            return Quiz.objects.filter(users=self.request.user)
+        return Quiz.objects.none()
+
     
     
     
