@@ -14,14 +14,16 @@ from typing import override
 class QuizView(TemplateView):
     template_name = "quiz/quiz.html"
     
-
     @override
     def get_context_data(self, **kwargs):
         pk = self.kwargs["pk"]
         quiz = Quiz.objects.get(pk=pk)
+        deck = quiz.deck  # assuming quiz has a ForeignKey to Deck
+        
         context = super().get_context_data(**kwargs)
         context["num_cards"] = quiz.cards.count()
         context["pk"] = pk
+        context["deck"] = deck  # Add deck object to context
         return context
 
 

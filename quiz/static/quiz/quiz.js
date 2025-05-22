@@ -59,9 +59,11 @@ document.addEventListener('DOMContentLoaded', _ => {
                     startBtn.remove();
                     displayCard(data.question);
                     setTimer(data.end_time);
+                    submitBtn.disabled = false;
                     break;
                 case 'end':
                     endReview(data.score);
+                    submitBtn.disabled = true;
                     break
                 default:
                     break;
@@ -80,6 +82,7 @@ document.addEventListener('DOMContentLoaded', _ => {
     });
 
     submitBtn.addEventListener('click', _ => {
+        submitBtn.disabled = true;
         ws.send(JSON.stringify({
             action: 'answer',
             answer: answerInput.value,

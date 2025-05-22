@@ -5,7 +5,7 @@
     <script src="{% static 'quiz/quiz.js' %}"></script>
 {% endblock scripts %}
 {% block stylesheets %}
-    <link rel="stylesheet" href"{% static 'quiz/quiz.css' %}">
+    <link rel="stylesheet" href="{% static 'quiz/quiz.css' %}">
 {% endblock stylesheets %}
 {% block content %}
     {{ pk|json_script:"quiz-pk" }}
@@ -20,6 +20,6 @@
     <input type="text" id="answer">
     <button id="submit-btn">Submit</button>
     <div class="back-deck-button">
-        <a href="{{ deck.get_absolute_url }}">Back to Deck</a>
+        <a href="/decks/{{ deck.pk }}/">Back to Deck</a>
     </div>
 {% endblock content %}
