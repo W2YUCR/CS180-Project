@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+  <link rel="stylesheet" href="{% static 'core/quiz-list.css' %}">
+  <link rel="stylesheet" href="{% static 'core/quiz-instructions.css' %}">
+  <div class="instructions-title">
+      <p>Instructions<br></p>
+  </div>
+  <div class="instructions-list">
+    <p>1. This is the page where you access the quizzes from all of your flashcard sets.<br></p>
+    <p>2. You can access the quiz for a specific flashcard set by clicking the name below.</p>
+  </div>
+  <table class="deck_list_container">
+    <thead>
+      <tr>
+        <th class="deck_list_title">Your Flashcard Sets</th>
+      </tr>
+    </thead>
+  {% if deck_list %}
+    <tbody>
+      {% for deck in deck_list %}
+        <tr>
+          <td>
+            <a href="{% url 'quiz-create' deck.pk %}">
+            <div class="deck">
+              <p  class="deck_name">{{ deck.name }}</p>
+              <p  class="deck_description">{{ deck.description }}</p>
+            </div>
+            </a>  
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  {% else %}
+    <tbody>
+      <tr>
+        <td>
+            <p class="deck_empty">No quizzes yet!</p>
+            <a href="{% url 'decks' %}" class="deck_create">Create one?</a>
+        </td>
+      </tr>
+    </tbody>
+  {% endif %}
+  </table>
+{% endblock content %}

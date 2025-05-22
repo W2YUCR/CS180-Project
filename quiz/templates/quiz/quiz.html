@@ -5,21 +5,26 @@
     <script src="{% static 'quiz/quiz.js' %}"></script>
 {% endblock scripts %}
 {% block stylesheets %}
-    <link rel="stylesheet" href"{% static 'quiz/quiz.css' %}">
+    <link rel="stylesheet" href="{% static 'quiz/quiz.css' %}">
 {% endblock stylesheets %}
 {% block content %}
-    {{ pk|json_script:"quiz-pk" }}
-    <p>
-        Card <span id="card-counter"></span> of <span id="card-total">{{ num_cards }}</span>
-    </p>
-    <p>
-        Time remaining: <span id="timer"></span>
-    </p>
-    <button id="start-btn">Start</button>
-    <div class="border rounded m-3" id="card"></div>
-    <input type="text" id="answer">
-    <button id="submit-btn">Submit</button>
-    <div class="back-deck-button">
-        <a href="{{ deck.get_absolute_url }}">Back to Deck</a>
+    <div class="m-4">
+        {{ pk|json_script:"quiz-pk" }}
+        <p>
+            Card <span id="card-counter"></span> of <span id="card-total">{{ num_cards }}</span>
+        </p>
+        <p>
+            Time remaining: <span id="timer"></span>
+        </p>
+        <button id="start-btn">Start</button>
+        <div class="border rounded m-3" id="card"></div>
+        <input type="text" id="answer">
+        <button id="submit-btn">Submit</button>
+        <div class="back-deck-button">
+            <a href="{% url 'deck-detail' deck.pk %}">Back to Deck</a>
+        </div>
+        <div class="back-quiz-list-button">
+            <a href="{% url 'quiz-list' %}" >Back to Quiz List</a>
+        </div>
     </div>
 {% endblock content %}

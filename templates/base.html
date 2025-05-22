@@ -29,8 +29,8 @@
                 <div class="login_options">
                     <a href="{% url 'create' %}" class="login_hover">Create</a>
                     <a href="{% url 'decks' %}" class="login_hover">Flashcard Sets</a>
-                    <a class="login_hover" href="{% url 'shared-decks' %}">Shared</a>
-                    <a class="login_hover">Quiz</a>
+                    <a href="{% url 'shared-decks' %}" class="login_hover">Shared</a>
+                    <a href="{% url 'quiz-list' %}" class="login_hover">Quiz</a>
                 </div>
                 {% endif %}
             </div>
