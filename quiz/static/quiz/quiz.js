@@ -13,12 +13,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let ws;
     let timerTimeout;
+    let currentCardIndex = 0;
 
     function displayCard(question) {
         cardDiv.innerText = question;
         answerInput.value = '';
         answerInput.disabled = false;
         submitBtn.disabled = false;
+        currentCardIndex++;
+        cardCounter.innerText = currentCardIndex;
     }
 
     function displayAnswer(answer) {
