@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.http import JsonResponse, HttpResponse
-from django.views.generic import View, TemplateView
+from django.views.generic import View, TemplateView, ListView, DetailView
 from django.views.generic.edit import CreateView
 
 from quiz.models import Quiz
@@ -9,6 +9,9 @@ from decks.models import Card, Deck
 
 from typing import override
 
+def quiz_list_view(request):
+    deck_list = Deck.objects.filter(owner=request.user)
+    return render(request, "quiz/quiz_list.html", {"deck_list": deck_list})
 
 # Create your views here.
 class QuizView(TemplateView):
@@ -70,3 +73,17 @@ class QuizCreateView(CreateView):
         for i, card in enumerate(Card.objects.filter(deck=deck)):
             quiz.cards.add(card, through_defaults={"index": i})
         return super().form_valid(form)
+
+class QuizListView(ListView):
+    model = Quiz
+    template_name = "quiz/quiz_list.html"
+    context_object_name = "quiz_list"
+
+    def get_queryset(self):
+        return Quiz.objects.filter(users=self.request.user)
+    
+    
+    
+class QuizDetailView(DetailView):
+    model = Quiz
+    template_name = 'quiz/quiz_detail.html'  
