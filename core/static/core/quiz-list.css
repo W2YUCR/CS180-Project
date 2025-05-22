@@ -1,0 +1,63 @@
+.deck_list_container {
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    justify-content: center;
+    margin-top: 5vh;
+    text-align: center;
+}
+.deck_list_title {
+    font-size: 2.2rem;
+    font-weight: normal;
+}
+.deck {
+    background-color: #21B78F;
+    box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.3);
+    margin-top: 2vh;
+    transition: transform 0.3s ease-in-out 0s;
+    padding: 6vh 20vw;
+    position: relative;
+    border-radius: 30px;
+}
+.deck_name {
+    font-size: 1.5rem;
+    color: white;
+    position: absolute;
+    top: 5%;
+    left: 2%;
+}
+.deck_description {
+    font-size: 1.2rem;
+    color:white;
+     position: absolute;
+    top: 40%;
+    left: 5%;
+     max-width: 90%; /* Ensure text doesn’t overflow horizontally */
+    white-space: nowrap; /* Prevent wrapping */
+    overflow: hidden; /* Hide overflowed content */
+    text-overflow: ellipsis;
+}
+.deck:hover {
+    transform: scale(1.1);
+}
+.deck_empty {
+    font-size: 2rem;
+    margin-top: 7vh;
+}
+.deck_create {
+    font-size: 2rem;
+    background-color: #BFD0CD;
+    color: black;
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);  
+    font-size: 1.5rem; 
+    padding: 1vh 3vw;
+    margin-top: 30vh;
+    display: flex;
+
+}
+.deck_create:hover {
+    background-color: #B8C3BD;
+
+}
