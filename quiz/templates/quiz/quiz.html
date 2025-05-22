@@ -8,18 +8,20 @@
     <link rel="stylesheet" href="{% static 'quiz/quiz.css' %}">
 {% endblock stylesheets %}
 {% block content %}
-    {{ pk|json_script:"quiz-pk" }}
-    <p>
-        Card <span id="card-counter"></span> of <span id="card-total">{{ num_cards }}</span>
-    </p>
-    <p>
-        Time remaining: <span id="timer"></span>
-    </p>
-    <button id="start-btn">Start</button>
-    <div class="border rounded m-3" id="card"></div>
-    <input type="text" id="answer">
-    <button id="submit-btn">Submit</button>
-    <div class="back-deck-button">
-        <a href="/decks/{{ deck.pk }}/">Back to Deck</a>
+    <div class="m-4">
+        {{ pk|json_script:"quiz-pk" }}
+        <p>
+            Card <span id="card-counter"></span> of <span id="card-total">{{ num_cards }}</span>
+        </p>
+        <p>
+            Time remaining: <span id="timer"></span>
+        </p>
+        <button id="start-btn">Start</button>
+        <div class="border rounded m-3" id="card"></div>
+        <input type="text" id="answer">
+        <button id="submit-btn">Submit</button>
+        <div class="back-deck-button">
+            <a href="/decks/{{ deck.pk }}/">Back to Deck</a>
+        </div>
     </div>
 {% endblock content %}

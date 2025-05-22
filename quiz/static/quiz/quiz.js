@@ -1,18 +1,24 @@
-document.addEventListener('DOMContentLoaded', _ => {
-    const cardDiv = document.getElementById('card');
-    const cardCounter = document.getElementById('card-counter');
+document.addEventListener('DOMContentLoaded', () => {
     const startBtn = document.getElementById('start-btn');
     const submitBtn = document.getElementById('submit-btn');
     const answerInput = document.getElementById('answer');
+    const cardDiv = document.getElementById('card');
+    const cardCounter = document.getElementById('card-counter');
     const timer = document.getElementById('timer');
     const pk = JSON.parse(document.getElementById('quiz-pk').textContent);
 
+    // 🔒 Ensure submit is disabled initially
+    submitBtn.disabled = true;
+    answerInput.disabled = true;
+
     let ws;
+    let timerTimeout;
 
     function displayCard(question) {
         cardDiv.innerText = question;
         answerInput.value = '';
         answerInput.disabled = false;
+        submitBtn.disabled = false;
     }
 
     function displayAnswer(answer) {
@@ -21,9 +27,9 @@ document.addEventListener('DOMContentLoaded', _ => {
 
     function endReview(score) {
         cardDiv.innerText = `Review finished. Score: ${score}`;
+        submitBtn.disabled = true;
+        answerInput.disabled = true;
     }
-
-    let timerTimout;
 
     function setTimer(endTime) {
         const now = Date.now();
@@ -35,16 +41,16 @@ document.addEventListener('DOMContentLoaded', _ => {
             return;
         }
         const fractional = delta % 1000;
-        timerTimout = setTimeout(() => setTimer(endTime), fractional);
+        timerTimeout = setTimeout(() => setTimer(endTime), fractional);
     }
 
     function clearAndWaitForServer() {
-        clearTimeout(timerTimout);
+        clearTimeout(timerTimeout);
+        submitBtn.disabled = true;
         answerInput.disabled = true;
-        cardDiv.innerText = "";
+        cardDiv.innerText = '';
     }
 
-    window.setTimer = setTimer;
     function connect() {
         ws = new WebSocket(`ws://${location.host}/ws/quiz/${pk}/`);
 
@@ -53,40 +59,38 @@ document.addEventListener('DOMContentLoaded', _ => {
             switch (data.type) {
                 case 'timeout':
                     displayAnswer(data.answer);
+                    submitBtn.disabled = true;
                     break;
 
                 case 'show':
-                    startBtn.remove();
+                    startBtn.style.display = 'none';
                     displayCard(data.question);
                     setTimer(data.end_time);
-                    submitBtn.disabled = false;
                     break;
+
                 case 'end':
                     endReview(data.score);
-                    submitBtn.disabled = true;
-                    break
-                default:
                     break;
             }
         });
 
-        ws.addEventListener('close', _ => {
-            setTimeout(connect, 0);
+        ws.addEventListener('close', () => {
+            setTimeout(connect, 1000);
         });
     }
 
     connect();
 
-    startBtn.addEventListener('click', _ => {
+    startBtn.addEventListener('click', () => {
         ws.send(JSON.stringify({ action: 'start' }));
     });
 
-    submitBtn.addEventListener('click', _ => {
-        submitBtn.disabled = true;
+    submitBtn.addEventListener('click', () => {
+        submitBtn.disabled = true; // 🔒 prevent double-submit
         ws.send(JSON.stringify({
             action: 'answer',
             answer: answerInput.value,
         }));
         clearAndWaitForServer();
-    })
+    });
 });
