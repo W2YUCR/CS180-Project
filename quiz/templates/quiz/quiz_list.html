@@ -21,7 +21,7 @@
       {% for deck in deck_list %}
         <tr>
           <td>
-            <a href="{% url 'quiz-view' deck.pk %}">
+            <a href="{% url 'quiz-create' deck_pk=deck.pk %}">
             <div class="deck">
               <p  class="deck_name">{{ deck.name }}</p>
               <p  class="deck_description">{{ deck.description }}</p>
