@@ -6,7 +6,7 @@
         {% csrf_token %}
         <p class="delete-deck-form">Are you sure you want to delete flashcard set named {{ object.name }}?</p>
         {{ form }}
-        <a href="{{ object.get_absolute_url }}" class="btn-btn-primary-btn-cancel">Cancel</a>
-        <input type="submit" value="Confirm" class="btn-btn-danger-btn-confirm">
+        <a href="{{ object.get_absolute_url }}" class="cancel">Cancel</a>
+        <input type="submit" value="Confirm" class="confirm">
     </form>
 {% endblock content %}

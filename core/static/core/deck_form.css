@@ -19,7 +19,7 @@
   flex-direction: column;
   align-items: center; 
   justify-content: center;
-  margin-top: 10vh; 
+  margin-bottom: 10vh; 
 }
 
 .deck-form input {
@@ -70,4 +70,11 @@
 .save_button:hover {
     background-color: #B8C3BD;
 
+}
+
+input[type="checkbox"] {
+    /* Example styles */
+    width: 35px;
+    height: 35px;
+    cursor: pointer;
 }
