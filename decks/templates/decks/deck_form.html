@@ -14,8 +14,10 @@
     <p>5. Unpublish this flashcard set by clicking the little box until a checkmark is not shown.</p>
     <p>6. Once done, click the "Save" button.</p>
 </div>
+<div class="deck_form_container">
 <form method="post" class="deck-form">{% csrf_token %}
-    {{ form.as_p }}
+        {{ form.as_p }}
     <input type="submit" value="Save" class="save_button">
 </form>
+</div>
 {% endblock content %}

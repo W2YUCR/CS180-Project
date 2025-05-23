@@ -1,4 +1,4 @@
-.result-decks {
+/* .result-decks {
     color: black;
 }
 
@@ -8,4 +8,25 @@
 
 .d-flex {
     margin-top: 30px;
+} */
+.search {
+    background-color: #21B78F;
+    color:white;
+    border: none;
+    border-radius: 5px;
+}
+.search:hover {
+    background-color: #19896D;
+
+}
+.d-flex {
+    max-width: 80%;
+    margin: 2vh auto;
+}
+.deck-labels, .result-decks {
+    margin-left: 11vw;
+    font-size: 1.2rem;
+}
+.col {
+    margin-bottom: 2vh;
 }

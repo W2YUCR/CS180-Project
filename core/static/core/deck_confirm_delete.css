@@ -1,4 +1,4 @@
-.btn-btn-primary-btn-cancel {
+/* .btn-btn-primary-btn-cancel {
     background-color: green;
     color: white;
     border: 3px solid black;
@@ -18,9 +18,34 @@
     margin: 5px;
     font-family: "Courier New";
     text-decoration: none;
-}
+} */
 
 .delete-deck-form {
     color: black;
-    margin-top: 30px;
+    margin-top: 5vh;
+    margin-left: 2vw;
+    font-size: 1.5rem;
+}
+.cancel {
+    background-color: #BFD0CD;
+    border: none;
+    border-radius: 15px;
+    padding: 1vh 2vw;
+    margin-left: 2vw;
+    font-size: 1.1rem;
+}
+.cancel:hover {
+    background-color: #B8C3BD;
+}
+.confirm {
+      background-color: #21B78F;
+    border: none;
+    border-radius: 15px;
+    padding: 1vh 2vw;
+    font-size: 1.1rem;
+    color: white;
+}
+.confirm:hover {
+    background-color: #19896D;
+
 }

@@ -17,12 +17,14 @@
                type="search"
                placeholder="Search"
                aria-label="Search">
-        <button class="btn btn-success" type="submit">Search</button>
+        <button class="search" type="submit">Search</button>
     </form>
     {% if search %}
         <p class="result-decks">Results for: "{{ search }}"</p>
     {% else %}
         <p class="deck-labels">All shared decks</p>
     {% endif %}
-    {% include "decks/_deck_list.html" with deck_list=deck_list %}
+    <div class="bot-spacing">
+        {% include "decks/_deck_list.html" with deck_list=deck_list %}
+    </div>
 {% endblock content %}
