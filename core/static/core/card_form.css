@@ -38,3 +38,59 @@ input[type="submit"] {
     margin: 10px;
     font-family: "Courier New";
 }
+
+.card-form-container {
+    display: flex;
+  flex-direction: column;
+  align-items: center; 
+  justify-content: center;
+  margin-bottom: 10vh;
+}
+#id_front {
+    width: 26vw;
+    border: none;
+    display: flex;
+    background-color: #CFDCD8;
+    height: 1vh;
+    padding: 10px;
+    color: black;
+    font-size: 1.2rem;
+    resize: none;
+    outline: none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);  
+    
+    font-family: var(--bs-body-font-family);
+}
+#id_back {
+        width: 26vw;
+    border: none;
+    display: flex;
+    background-color: #CFDCD8;
+    height: 20vh;
+    padding: 10px;
+    color: black;
+    font-size: 1.2rem;
+    resize: none;
+    outline: none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+    font-family: var(--bs-body-font-family);
+
+}
+label[for="id_front"] {
+    font-size: 1.5rem;
+}
+label[for="id_back"] {
+    font-size: 1.5rem;
+}
+input[type="submit"] {
+    border: none;
+    font-family: var(--bs-body-font-family);
+    font-size: 1.1rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+    padding: 1vh 2vw;
+    display: block;
+    margin: 0 auto;
+}
+input[type="submit"]:hover {
+    background-color: #B8C3BD;
+}

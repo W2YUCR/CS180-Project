@@ -13,8 +13,10 @@
     <p>4. Save the flashcard by clicking the "Save" button.<br></p>
     <p>Note: Both text boxes from front and back must have input in order to be saved to flashcard deck.</p>
 </div>
+<div class="card-form-container">
 <form method="post" class="card-form">{% csrf_token %}
     {{ form.as_p }}
     <input type="submit" value="Save" class="save-button2">
 </form>
+</div>
 {% endblock content %}
