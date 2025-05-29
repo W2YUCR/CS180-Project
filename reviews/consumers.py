@@ -19,7 +19,7 @@ class ReviewWebSocketConsumer(AsyncJsonWebsocketConsumer):
             await self.accept()
 
     @override
-    async def receive_json(self, content):
+    async def receive_json(self, content, **kwargs):
         match content:
             case {"action": "ready"}:
                 await self.send_next()

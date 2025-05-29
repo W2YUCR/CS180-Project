@@ -17,6 +17,7 @@ dependencies = [
     "mysqlclient",
     "openai",
     "fsrs",
+    "coverage",
 ]
 
 [build-system]
@@ -33,7 +34,6 @@ check_untyped_defs = true
 follow_untyped_imports = true
 enable_error_code = "explicit-override"
 exclude = "^build/"
-
 
 [tool.django-stubs]
 django_settings_module = "flashcards.settings"
