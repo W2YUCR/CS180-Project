@@ -31,7 +31,6 @@ class QuizView(TemplateView):
 
 
 class QuizCurrentView(View):
-    @override
     def get(self, request, *args, **kwargs):
         pk = self.kwargs["pk"]
         quiz = Quiz.objects.get(pk=pk)
@@ -50,7 +49,6 @@ class QuizCurrentView(View):
 
 
 class QuizNextView(View):
-    @override
     def post(self, request, *args, **kwargs):
         pk = self.kwargs["pk"]
         quiz = Quiz.objects.get(pk=pk)

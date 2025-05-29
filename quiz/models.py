@@ -16,7 +16,6 @@ class Quiz(models.Model):
     index = models.PositiveIntegerField()
     users: models.ManyToManyField = models.ManyToManyField(User)
 
-    @override
     def get_absolute_url(self):
         return reverse("quiz-view", kwargs={"pk": self.pk})
 

@@ -20,7 +20,7 @@ class UserProfileView(DetailView):
     template_name = "accounts/profile.html"
 
     @override
-    def get_object(self):
+    def get_object(self, queryset=None):
         if "pk" in self.kwargs:
             return User.objects.get(pk=self.kwargs["pk"])
         elif self.request.user.is_authenticated:

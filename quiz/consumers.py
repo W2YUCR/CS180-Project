@@ -20,7 +20,7 @@ class QuizWebSocketConsumer(AsyncJsonWebsocketConsumer):
         await self.accept()
 
     @override
-    async def receive_json(self, content):
+    async def receive_json(self, content, **kwargs):
         match content:
             case {"action": "start"}:
                 await sync_to_async(quiz_show.send)(self.quiz_pk)
