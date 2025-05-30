@@ -2,7 +2,7 @@
 {% load static %}
 {% block content %}
     <link rel="stylesheet" href="{% static 'core/card_detail.css' %}">
-    <link rel="stylesheet" href="{% static 'core/instructions.css' %}">
+    <link rel="stylesheet" href="{% static 'core/deck-instructions.css' %}">
     <div class="instructions-title">
         <p>Instructions<br></p>
     </div>
@@ -13,9 +13,9 @@
         <p>4. If you want to delete this flashcard, click the "Delete" button.<br></p>
     </div>
     <div class="card-navigation">
-        <a href="{{ card.deck.get_absolute_url }}">Back to Deck</a>
-        <a href="{% url 'card-update' pk=card.pk %}">Edit</a>
-        <a href="{% url 'card-delete' pk=card.pk %}">Delete</a>
+        <a href="{{ card.deck.get_absolute_url }}" class="card-options">Back to Deck</a>
+        <a href="{% url 'card-update' pk=card.pk %}"class="card-options">Edit</a>
+        <a href="{% url 'card-delete' pk=card.pk %}"class="card-options">Delete</a>
     </div>
     {% include "decks/_card_preview.html" %}
 {% endblock content %}

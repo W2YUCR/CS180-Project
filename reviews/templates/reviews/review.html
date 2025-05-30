@@ -1,13 +1,20 @@
 {% extends "base.html" %}
 {% load static %}
 {% block scripts %}
+  <link rel="stylesheet" href="{% static 'core/reviews.css' %}">
+
     <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.5/dist/js.cookie.min.js"></script>
     <script src="{% static "reviews/reviews.js" %}"></script>
 {% endblock scripts %}
 {% block content %}
     {{ deck_pk|json_script:"deck-pk" }}
-    <div class="border rounded m-3" id="card"></div>
-    <button id="flip-btn">Flip</button>
-    <button id="good-btn">Good</button>
-    <button id="again-btn">Again</button>
+    <div class="card-back">
+        <div class="card"></div>
+        <div class="word" id="card"></div>
+    </div>
+    <div class="card-navigation">
+        <button id="flip-btn"class="card-options">Flip</button>
+        <button id="good-btn"class="card-options">Good</button>
+        <button id="again-btn"class="card-options">Again</button>
+    </div>
 {% endblock content %}

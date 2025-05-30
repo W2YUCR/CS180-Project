@@ -30,3 +30,8 @@
 .col {
     margin-bottom: 2vh;
 }
+.btn-primary {
+    background-color: #21B78F;
+    border: none;
+
+}
