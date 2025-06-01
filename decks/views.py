@@ -85,35 +85,36 @@ class DeckDeleteView(RestrictedToDeckOwnerMixin, DeleteView):
 
 import requests
 
+import requests
+
 class SharedDecksView(ListView):
     context_object_name = "deck_list"
     template_name = "decks/shared.html"
 
-    @override
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        search = self.request.GET.get("search", "")
-        context["search"] = search
+        search_query = self.request.GET.get("search", "")
+        context["search"] = search_query
 
-        if search:
+        if search_query:
             try:
-                response = requests.get("https://aloft.pythonanywhere.com/chat", params={"message": search}, timeout=5)
-                if response.status_code == 200:
-                    context["api_results"] = response.json()  # assuming JSON response
-                else:
-                    context["api_results"] = {"error": "API request failed"}
-            except requests.exceptions.RequestException as e:
+                api_url = "http://aloftballoon.pythonanywhere.com/api/value"
+                params = {
+                    "user_string": search_query,
+                    "user_id": "",
+                    "insertOrNot": 0
+                }
+                response = requests.get(api_url, params=params, timeout=5)
+                response.raise_for_status()
+                data = response.json()
+                context["api_results"] = data.get("strings", [])
+            except Exception as e:
                 context["api_results"] = {"error": str(e)}
 
         return context
 
-    @override
     def get_queryset(self):
-        queryset = Deck.objects.select_related("owner").filter(published=True)
-        search = self.request.GET.get("search")
-        if search:
-            queryset = queryset.filter(name__icontains=search)
-        return queryset
+        return Deck.objects.select_related("owner").filter(**{"published": True})
 
 
 class RestrictedToCardOwnerMixin(LoginRequiredMixin, PermissionRequiredMixin):
