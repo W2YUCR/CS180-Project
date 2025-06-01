@@ -12,6 +12,8 @@ from django.shortcuts import redirect
 from decks.models import Card, Deck
 from typing import override, Protocol
 
+import requests
+
 
 # This is probably not a good idea but it fixes the type errors...
 # https://mypy.readthedocs.io/en/latest/more_types.html#mixin-classes
@@ -81,6 +83,7 @@ class DeckDeleteView(RestrictedToDeckOwnerMixin, DeleteView):
     model = Deck
     success_url = reverse_lazy("decks")
 
+import requests
 
 class SharedDecksView(ListView):
     context_object_name = "deck_list"
@@ -89,15 +92,28 @@ class SharedDecksView(ListView):
     @override
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["search"] = self.request.GET.get("search", "")
+        search = self.request.GET.get("search", "")
+        context["search"] = search
+
+        if search:
+            try:
+                response = requests.get("https://aloft.pythonanywhere.com/chat", params={"message": search}, timeout=5)
+                if response.status_code == 200:
+                    context["api_results"] = response.json()  # assuming JSON response
+                else:
+                    context["api_results"] = {"error": "API request failed"}
+            except requests.exceptions.RequestException as e:
+                context["api_results"] = {"error": str(e)}
+
         return context
 
     @override
     def get_queryset(self):
-        # filter(published=True) for some reason fails mypy even though Django works fine
-        # Therefore, we use the alternative syntax which avoids mypy checking
-        # Note: should probably figure out why it fails
-        return Deck.objects.select_related("owner").filter(**{"published": True})
+        queryset = Deck.objects.select_related("owner").filter(published=True)
+        search = self.request.GET.get("search")
+        if search:
+            queryset = queryset.filter(name__icontains=search)
+        return queryset
 
 
 class RestrictedToCardOwnerMixin(LoginRequiredMixin, PermissionRequiredMixin):
