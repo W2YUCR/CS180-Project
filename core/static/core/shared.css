@@ -35,3 +35,19 @@
     border: none;
 
 }
+.api-title {
+    font-weight: bold;
+    font-size: 1.2em;
+    margin-bottom: 0.25em;
+    white-space: pre-wrap;
+}
+.api-subtitle {
+    color: darkred;
+    margin-bottom: 0.25em;
+    white-space: pre-wrap;
+}
+.api-snippet {
+    color: #7b4ecf;
+    margin-bottom: 0.25em;
+    white-space: pre-wrap;
+}

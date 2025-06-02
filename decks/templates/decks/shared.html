@@ -37,11 +37,11 @@
                         <li>
                     {% endif %}
                     {% if forloop.counter0|divisibleby:3 %}
-                        <div>{{ item }}</div>
+                        <div class="api-title">{{ item }}</div>
                     {% elif forloop.counter0|add:'2'|divisibleby:3 %}
-                        <div>{{ item }}</div>
+                        <div class="api-subtitle">{{ item }}</div>
                     {% else %}
-                        <div>{{ item }}</div>
+                        <div class="api-snippet">{{ item }}</div>
                     {% endif %}
                     {% if forloop.last or forloop.counter|divisibleby:3 %}
                         </li>
