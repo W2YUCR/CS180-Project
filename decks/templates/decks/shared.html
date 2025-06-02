@@ -25,8 +25,6 @@
         <p class="deck-labels">All shared decks</p>
     {% endif %}
     <div class="bot-spacing">
-        
-
         {% if api_results %}
     <div class="api-results">
         <h3>Search Results</h3>
@@ -38,15 +36,13 @@
                     {% if forloop.first or forloop.counter0|divisibleby:3 %}
                         <li>
                     {% endif %}
-
                     {% if forloop.counter0|divisibleby:3 %}
-                        <div style="font-weight: bold; font-size: 1.2em; margin-bottom: 0.25em; white-space: pre-wrap;">{{ item }}</div>
+                        <div>{{ item }}</div>
                     {% elif forloop.counter0|add:'2'|divisibleby:3 %}
-                        <div style="color: darkred; margin-bottom: 0.25em; white-space: pre-wrap;">{{ item }}</div>
+                        <div>{{ item }}</div>
                     {% else %}
-                        <div style="color: #7b4ecf; margin-bottom: 0.25em; white-space: pre-wrap;">{{ item }}</div>
+                        <div>{{ item }}</div>
                     {% endif %}
-
                     {% if forloop.last or forloop.counter|divisibleby:3 %}
                         </li>
                     {% endif %}
@@ -55,7 +51,5 @@
         {% endif %}
     </div>
 {% endif %}
-
-
     </div>
 {% endblock content %}

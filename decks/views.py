@@ -107,7 +107,7 @@ class SharedDecksView(ListView):
                 response.raise_for_status()
                 data = response.json()
                 raw_strings = data.get("strings", [])
-                context["api_results"] = [s.replace("_", "\n") for s in raw_strings]
+                context["api_results"] = [s.replace("@", "\n") for s in raw_strings]
             except Exception as e:
                 context["api_results"] = {"error": str(e)}
 
@@ -157,7 +157,7 @@ class CardCreateView(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
 
         front = form.cleaned_data.get("front", "").strip()
         back = form.cleaned_data.get("back", "").strip()
-        user_string = f"Front: {front}_Back: {back}"
+        user_string = f"Front: {front}@Back: {back}"
 
         try:
             api_url = "http://aloftballoon.pythonanywhere.com/api/value"
