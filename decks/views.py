@@ -106,7 +106,8 @@ class SharedDecksView(ListView):
                 response = requests.get(api_url, params=params)
                 response.raise_for_status()
                 data = response.json()
-                context["api_results"] = data.get("strings", [])
+                raw_strings = data.get("strings", [])
+                context["api_results"] = [s.replace("_", "\n") for s in raw_strings]
             except Exception as e:
                 context["api_results"] = {"error": str(e)}
 
