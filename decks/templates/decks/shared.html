@@ -25,12 +25,11 @@
         <p class="deck-labels">All shared decks</p>
     {% endif %}
     <div class="bot-spacing">
-        {% include "decks/_deck_list.html" with deck_list=deck_list %}
         
 
         {% if api_results %}
     <div class="api-results">
-        <h3>External Results</h3>
+        <h3>Search Results</h3>
         {% if api_results.error %}
             <p>Error: {{ api_results.error }}</p>
         {% else %}
