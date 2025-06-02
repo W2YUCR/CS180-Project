@@ -1,57 +1,72 @@
-document.addEventListener('DOMContentLoaded', _ => {
-    const cardDiv = document.getElementById('card');
+document.addEventListener('DOMContentLoaded', () => {
+    const inner = document.getElementById('flip-card-inner');
+    const frontFace = document.getElementById('card-front');
+    const backFace = document.getElementById('card-back');
     const flipBtn = document.getElementById('flip-btn');
     const goodBtn = document.getElementById('good-btn');
     const againBtn = document.getElementById('again-btn');
-    const pk = JSON.parse(document.getElementById('deck-pk').textContent);
-
+    const deckPk = JSON.parse(document.getElementById('deck-pk').textContent);
     let ws;
-
-    function displayCard(question) {
-        cardDiv.innerText = question;
-    }
-
-    function endReview() {
-        cardDiv.innerText = `Review finished.`;
-    }
-
+    let expectingBack = false;
+    let reviewEnded = false;
     function connect() {
-        ws = new WebSocket(`ws://${location.host}/ws/reviews/${pk}/`);
-
-        ws.addEventListener('open', _ => {
-            ws.send(JSON.stringify({ action: "ready" }))
-        });
-
+        ws = new WebSocket(`ws://${location.host}/ws/reviews/${deckPk}/`);
+        ws.addEventListener('open', () => { ws.send(JSON.stringify({ action: "ready" })); });
         ws.addEventListener('message', event => {
             const data = JSON.parse(event.data);
             switch (data.type) {
                 case 'show':
-                    displayCard(data.card);
+                    if (expectingBack) {
+                        backFace.textContent = data.card;
+                        inner.classList.add('is-flipped');
+                    } else {
+                        inner.classList.remove('is-flipped');
+                        frontFace.textContent = data.card;
+                        backFace.textContent = '';
+                    }
+                    expectingBack = false;
+                    reviewEnded = false;
                     break;
                 case 'end':
-                    endReview();
-                    break
-                default:
+                    frontFace.textContent = 'Review finished 🎉';
+                    backFace.textContent = '';
+                    inner.classList.remove('is-flipped');
+                    reviewEnded = true;
                     break;
             }
         });
-
-        ws.addEventListener('close', _ => {
-            setTimeout(connect, 0);
-        });
+        ws.addEventListener('close', () => { setTimeout(connect, 0); });
     }
-
     connect();
-
-    flipBtn.addEventListener('click', _ => {
-        ws.send(JSON.stringify({ action: "flip" }))
+    function flipLocally() {
+        if (inner.classList.contains('is-flipped')) {
+            inner.classList.remove('is-flipped');
+            expectingBack = false;
+        } else {
+            ws.send(JSON.stringify({ action: "flip" }));
+            expectingBack = true;
+        }
+    }
+    document.getElementById('flip-card').addEventListener('click', () => {
+        if (reviewEnded) {
+            ws.send(JSON.stringify({ action: "ready" }));
+        } else {
+            flipLocally();
+        }
     });
-
-    goodBtn.addEventListener('click', _ => {
-        ws.send(JSON.stringify({ action: "rate", rating: "good" }))
+    flipBtn.addEventListener('click', () => {
+        if (reviewEnded) {
+            ws.send(JSON.stringify({ action: "ready" }));
+        } else {
+            flipLocally();
+        }
     });
-
-    againBtn.addEventListener('click', _ => {
-        ws.send(JSON.stringify({ action: "rate", rating: "again" }))
+    goodBtn.addEventListener('click', () => {
+        ws.send(JSON.stringify({ action: "rate", rating: "good" }));
+        expectingBack = false;
+    });
+    againBtn.addEventListener('click', () => {
+        ws.send(JSON.stringify({ action: "rate", rating: "again" }));
+        expectingBack = false;
     });
 });

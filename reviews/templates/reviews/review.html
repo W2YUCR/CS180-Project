@@ -1,20 +1,22 @@
 {% extends "base.html" %}
 {% load static %}
 {% block scripts %}
-  <link rel="stylesheet" href="{% static 'core/reviews.css' %}">
-
-    <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.5/dist/js.cookie.min.js"></script>
-    <script src="{% static "reviews/reviews.js" %}"></script>
+<link rel="stylesheet" href="{% static 'core/reviews.css' %}">
+<script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.5/dist/js.cookie.min.js"></script>
+<script src="{% static 'reviews/reviews.js' %}"></script>
 {% endblock scripts %}
+
 {% block content %}
-    {{ deck_pk|json_script:"deck-pk" }}
-    <div class="card-back">
-        <div class="card"></div>
-        <div class="word" id="card"></div>
+{{ deck_pk|json_script:"deck-pk" }}
+<div class="flip-card" id="flip-card">
+    <div class="flip-card-inner" id="flip-card-inner">
+        <div class="flip-card-face flip-card-front" id="card-front"></div>
+        <div class="flip-card-face flip-card-back" id="card-back"></div>
     </div>
-    <div class="card-navigation">
-        <button id="flip-btn"class="card-options">Flip</button>
-        <button id="good-btn"class="card-options">Good</button>
-        <button id="again-btn"class="card-options">Again</button>
-    </div>
+</div>
+<div class="card-navigation">
+    <button id="flip-btn" class="card-options">Flip</button>
+    <button id="good-btn" class="card-options">Good</button>
+    <button id="again-btn" class="card-options">Again</button>
+</div>
 {% endblock content %}
