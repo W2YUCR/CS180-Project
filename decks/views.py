@@ -89,7 +89,7 @@ import requests
 class SharedDecksView(ListView):
     context_object_name = "deck_list"
     template_name = "decks/shared.html"
-
+    @override
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         search_query = self.request.GET.get("search", "")
@@ -113,6 +113,7 @@ class SharedDecksView(ListView):
 
         return context
 
+    @override
     def get_queryset(self):
         return Deck.objects.select_related("owner").filter(**{"published": True})
 

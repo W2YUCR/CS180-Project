@@ -6,7 +6,26 @@ import nltk
 from nltk.corpus import wordnet
 import praw
 
+#experimental
+import openai
+openai.api_key = "Useyourkeybymakingadeveloperaccount"
 
+# should pip install praw or nltk if not installed already
+
+
+# API credentials: Reddit
+
+# Create a reddit develepor account for your credentials
+# I have used mine on the app
+# Blurred out the password though
+
+reddit = praw.Reddit(
+    client_id="0xJRA2fY3PeOQYmZF_Qokw",
+    client_secret="Pd2ddW-y9B4cs42c2QbRtnWvJvVoSg",
+    password="UseYourPassword",
+    user_agent="AnythingYouWant",
+    username="UseYourUsername",
+)
 
 # Ensure NLTK is there, sometimes server goes idle and shuts it off
 try:
