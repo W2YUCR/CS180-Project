@@ -104,7 +104,7 @@ class SharedDecksView(ListView):
                     "user_id": "",
                     "insertOrNot": 0
                 }
-                response = requests.get(api_url, params=params, timeout=5)
+                response = requests.get(api_url, params=params)
                 response.raise_for_status()
                 data = response.json()
                 context["api_results"] = data.get("strings", [])
