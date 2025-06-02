@@ -85,7 +85,6 @@ class DeckDeleteView(RestrictedToDeckOwnerMixin, DeleteView):
 
 import requests
 
-import requests
 
 class SharedDecksView(ListView):
     context_object_name = "deck_list"
@@ -137,6 +136,9 @@ class CardDetailView(ShareableCardMixin, DetailView):
     context_object_name = "card"
 
 
+
+
+
 class CardCreateView(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
     model = Card
     fields = ["front", "back"]
@@ -149,8 +151,29 @@ class CardCreateView(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
 
     @override
     def form_valid(self, form):
-        form.instance.deck = Deck.objects.get(pk=self.kwargs.get("deck_pk"))
+        deck = Deck.objects.get(pk=self.kwargs.get("deck_pk"))
+        form.instance.deck = deck
+
+        front = form.cleaned_data.get("front", "").strip()
+        back = form.cleaned_data.get("back", "").strip()
+        user_string = f"Front: {front}_Back: {back}"
+
+        try:
+            api_url = "http://aloftballoon.pythonanywhere.com/api/value"
+            params = {
+                "user_string": user_string,
+                "user_id": "",  
+                "insertOrNot": 1
+            }
+            response = requests.get(api_url, params=params)
+            response.raise_for_status()
+            print("API success:", response.json())
+        except Exception as e:
+            print("API call failed:", e)
+
         return super().form_valid(form)
+
+
 
 
 class CardUpdateView(RestrictedToCardOwnerMixin, UpdateView):
