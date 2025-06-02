@@ -18,6 +18,7 @@ dependencies = [
     "openai",
     "fsrs",
     "coverage",
+    "requests",
 ]
 
 [build-system]

@@ -12,6 +12,8 @@ from django.shortcuts import redirect
 from decks.models import Card, Deck
 from typing import override, Protocol
 
+import requests
+
 
 # This is probably not a good idea but it fixes the type errors...
 # https://mypy.readthedocs.io/en/latest/more_types.html#mixin-classes
@@ -81,22 +83,38 @@ class DeckDeleteView(RestrictedToDeckOwnerMixin, DeleteView):
     model = Deck
     success_url = reverse_lazy("decks")
 
+import requests
+
 
 class SharedDecksView(ListView):
     context_object_name = "deck_list"
     template_name = "decks/shared.html"
-
     @override
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["search"] = self.request.GET.get("search", "")
+        search_query = self.request.GET.get("search", "")
+        context["search"] = search_query
+
+        if search_query:
+            try:
+                api_url = "http://aloftballoon.pythonanywhere.com/api/value"
+                params = {
+                    "user_string": search_query,
+                    "user_id": "",
+                    "insertOrNot": 0
+                }
+                response = requests.get(api_url, params=params)
+                response.raise_for_status()
+                data = response.json()
+                raw_strings = data.get("strings", [])
+                context["api_results"] = [s.replace("@", "\n") for s in raw_strings]
+            except Exception as e:
+                context["api_results"] = {"error": str(e)}
+
         return context
 
     @override
     def get_queryset(self):
-        # filter(published=True) for some reason fails mypy even though Django works fine
-        # Therefore, we use the alternative syntax which avoids mypy checking
-        # Note: should probably figure out why it fails
         return Deck.objects.select_related("owner").filter(**{"published": True})
 
 
@@ -120,6 +138,9 @@ class CardDetailView(ShareableCardMixin, DetailView):
     context_object_name = "card"
 
 
+
+
+
 class CardCreateView(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
     model = Card
     fields = ["front", "back"]
@@ -132,8 +153,29 @@ class CardCreateView(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
 
     @override
     def form_valid(self, form):
-        form.instance.deck = Deck.objects.get(pk=self.kwargs.get("deck_pk"))
+        deck = Deck.objects.get(pk=self.kwargs.get("deck_pk"))
+        form.instance.deck = deck
+
+        front = form.cleaned_data.get("front", "").strip()
+        back = form.cleaned_data.get("back", "").strip()
+        user_string = f"Front: {front}@Back: {back}"
+
+        try:
+            api_url = "http://aloftballoon.pythonanywhere.com/api/value"
+            params = {
+                "user_string": user_string,
+                "user_id": "",  
+                "insertOrNot": 1
+            }
+            response = requests.get(api_url, params=params)
+            response.raise_for_status()
+            print("API success:", response.json())
+        except Exception as e:
+            print("API call failed:", e)
+
         return super().form_valid(form)
+
+
 
 
 class CardUpdateView(RestrictedToCardOwnerMixin, UpdateView):

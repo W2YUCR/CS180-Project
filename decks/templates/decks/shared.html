@@ -7,9 +7,9 @@
         <p>Instructions<br></p>
     </div>
     <div class="instructions-list">
-        <p>1. This is the page the you can search or view published flashcard sets.<br></p>
-        <p>2. You search for the flashcard set by inputting the search bar and then click the "Search" button.<br></p>
-        <p>3. For the given flashcard set, click the "View" button to see the contents of that flashcard set..<br></p>
+        <p>1. This is the page the you can search or view published flashcards.<br></p>
+        <p>2. You can search for flashcards by inputting your query in the search bar and then clicking the "Search" button.<br></p>
+        <p>3. The best results are shown from all the shared flashcards on TriviaTrek!.<br></p>
     </div>
     <form class="d-flex" role="search">
         <input class="form-control me-2"
@@ -25,6 +25,31 @@
         <p class="deck-labels">All shared decks</p>
     {% endif %}
     <div class="bot-spacing">
-        {% include "decks/_deck_list.html" with deck_list=deck_list %}
+        {% if api_results %}
+    <div class="api-results">
+        <h3>Search Results</h3>
+        {% if api_results.error %}
+            <p>Error: {{ api_results.error }}</p>
+        {% else %}
+            <ul>
+                {% for item in api_results %}
+                    {% if forloop.first or forloop.counter0|divisibleby:3 %}
+                        <li>
+                    {% endif %}
+                    {% if forloop.counter0|divisibleby:3 %}
+                        <div class="api-title">{{ item }}</div>
+                    {% elif forloop.counter0|add:'2'|divisibleby:3 %}
+                        <div class="api-subtitle">{{ item }}</div>
+                    {% else %}
+                        <div class="api-snippet">{{ item }}</div>
+                    {% endif %}
+                    {% if forloop.last or forloop.counter|divisibleby:3 %}
+                        </li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </div>
+{% endif %}
     </div>
 {% endblock content %}
