@@ -76,7 +76,7 @@ class DeckCreateView(LoginRequiredMixin, CreateView):
 
 class DeckUpdateView(RestrictedToDeckOwnerMixin, UpdateView):
     model = Deck
-    fields = ["name", "description", "published"]
+    fields = ["name", "description"]
 
 
 class DeckDeleteView(RestrictedToDeckOwnerMixin, DeleteView):
