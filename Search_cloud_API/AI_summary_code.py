@@ -1,6 +1,5 @@
 from flask import Flask, request, jsonify
 import openai
-import os
 
 app = Flask(__name__)
 
@@ -18,14 +17,13 @@ def chat():
     if not user_message:
         return jsonify({"error": "Missing 'message' parameter"}), 400
 
-    messages_dicts = [
+    messages = [
         {"role": "system", "content": system_prompt["content"]},
         {"role": "user", "content": str(user_message)},
     ]
-    messages = [openai.ChatCompletionMessage.create(**msg) for msg in messages_dicts]
 
     try:
-        response = openai.chat.completions.create(
+        response = openai.ChatCompletion.create(
             model="gpt-4o-mini",
             messages=messages,
             max_tokens=200,
