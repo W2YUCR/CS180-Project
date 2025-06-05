@@ -18,7 +18,7 @@ def chat():
     if not user_message:
         return jsonify({"error": "Missing 'message' parameter"}), 400
 
-    messages = [system_prompt, {"role": "user", "content": user_message}]
+    messages = [dict(system_prompt), {"role": "user", "content": str(user_message)}]
 
     try:
         response = openai.chat.completions.create(
