@@ -18,7 +18,10 @@ def chat():
     if not user_message:
         return jsonify({"error": "Missing 'message' parameter"}), 400
 
-    messages = [dict(system_prompt), {"role": "user", "content": str(user_message)}]
+    messages = [
+        {"role": "system", "content": system_prompt["content"]},
+        {"role": "user", "content": str(user_message)},
+    ]
 
     try:
         response = openai.chat.completions.create(
@@ -27,7 +30,7 @@ def chat():
             max_tokens=200,
             temperature=0.7,
         )
-        answer = response.choices[0].message.content.strip()
+        answer = (response.choices[0].message.content or "").strip()
         return jsonify({"reply": answer})
     except Exception as e:
         return jsonify({"error": f"OpenAI API error: {str(e)}"}), 500
